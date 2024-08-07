@@ -1,0 +1,2 @@
+deepface==0.0.80
+sixdrepnet==0.1.5
