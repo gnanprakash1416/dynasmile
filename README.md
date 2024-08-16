@@ -25,7 +25,7 @@
 
 - **Low cost**:Dynasmile do not rely on local graphical card. The special architecture of this software relies on EC2 server, which can be rent at low cost and used at any time.
 
-## 🎓 Dependency
+## 🎓 Functionality
 
 Dynasmile processes the video uploaded by the user. It conducts detailed smile analysis on the selected frame, which includes the detecion of 13 dentofacial landmarks and perform 9 measurements.
 
