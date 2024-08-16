@@ -98,13 +98,18 @@ python ./install_tools/install_service.py
 
 ### Starting the program
 ```shell
-# Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
+# Open a terminal (Command Prompt or PowerShell for Windows)
 
 # Navigate to the project directory
 cd The\path\to\your\project\directory
 
 # Use the python program in venv folder to run the server-configuration.py
 venv\Scripts\python.exe client\server-configuration.py
+
+# Open another terminal (Command Prompt or PowerShell for Windows)
+
+# Navigate to the project directory
+cd The\path\to\your\project\directory
 
 # After the web service has been provoked, you can start the main interface.
 venv\Scripts\python.exe client\software\main.py
