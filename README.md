@@ -101,13 +101,13 @@ python ./install_tools/install_service.py
 # Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
 
 # Navigate to the project directory
-cd The/path/to/your/project/directory
+cd The\path\to\your\project\directory
 
 # Use the python program in venv folder to run the server-configuration.py
-./venv/Scripts/python.exe ./client/server-configuration.py
+venv\Scripts\python.exe client\server-configuration.py
 
 # After the web service has been provoked, you can start the main interface.
-./venv/Scripts/python.exe ./client/software/main.py
+venv\Scripts\python.exe client\software\main.py
 
 ```
 
