@@ -73,6 +73,9 @@ To build the packages, follow these steps:
 # Ensure Git is installed
 # Visit https://git-scm.com to download and install console Git if not already installed
 
+# This program relies on EC2 instance to run.
+# If you are new to EC2 instance, https://aws.amazon.com/ec2/getting-started/ is a good source
+# for learning how to create one EC2 instance and establish remote connection.
 # Create a Amazon account, and create an Amazon EC2 instance with g4dn.xlarge
 # For people who do this, you might have difficulties. Please feel free to contact dentistfrankchen@outlook.com
 
