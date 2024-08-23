@@ -14,6 +14,7 @@ from library.settings_Dialog import CustomUI as set_Dialog
 from library.test_batch_detections import load_model, detect_face
 from library.bucket_test import upload_video, upload_video_new
 from library.json_handler import append_tojson, is_item_in_json, read_from_json
+from library.another import manage_item
 
 import socket
 from deepface import DeepFace
@@ -23,6 +24,28 @@ import matplotlib.pyplot as plt
 import socketio
 import json
 import boto3
+
+from PIL import Image
+import subprocess
+import argparse
+import time
+
+
+current_path=os.path.abspath(__file__)
+current_folder=os.path.dirname(current_path)
+parent_folder=os.path.dirname(current_folder)
+upper_folder=os.path.dirname(parent_folder)
+
+server=manage_item(os.path.join(current_folder,'library','server.json'),"server")
+if server==2 or server==3:
+    server=manage_item(os.path.join(current_folder,'library','server.json'),"server")
+
+python_path=os.path.join(upper_folder,'venv','Scripts','python.exe')
+process=subprocess.Popen(['start','cmd','/k',python_path,
+os.path.join(current_folder,'library','para.py'),'--server',server],shell=True)
+
+print("loading dependencies...")
+time.sleep(20)
 
 
 class Thread(QThread):
@@ -264,6 +287,8 @@ class CustomUI(QMainWindow):
 
         self.save_img = False
 
+        self.recognize_json=False #set to true if you want to use commissure.json to verify whether the file has been analyzed.
+
         # the factor used to measure distance(the distance of middle face.)[Now
         # is the distance betwwen inner canthus--in millimeters.]
         self.conversion_factor = 35
@@ -313,7 +338,19 @@ class CustomUI(QMainWindow):
 
         # self.s3_resource = boto3.resource('s3')
 
-        self.s3_client = boto3.client('s3')
+        with open(os.path.join(current_folder,'library','aws_config.json')) as json_file:
+            config = json.load(json_file)
+        
+        # 使用 JSON 中的值配置 boto3 客户端
+
+        self.s3_client = boto3.client(
+            's3',
+            region_name=config['region_name'],
+            aws_access_key_id=config['aws_access_key_id'],
+            aws_secret_access_key=config['aws_secret_access_key']
+        )
+
+        #self.s3_client = boto3.client('s3')
 
         # to ensure the label in the column has enough width.
         self.ui.gridLayout.setColumnMinimumWidth(0, 900)
@@ -523,7 +560,7 @@ class CustomUI(QMainWindow):
         if self.vid.isOpened():
             self.vid.set(cv2.CAP_PROP_POS_FRAMES, frame_target)
 
-        self.ui.time_setter.setText(str(float(self.current_frame / self.fps)))
+        self.ui.time_setter.setText(str(float((self.current_frame+1) / self.fps)))
 
         img, self.image = self.vid.read()
 
@@ -680,7 +717,7 @@ class CustomUI(QMainWindow):
         if self.requires_analyze == True:
             # you cannot press the start button when it is analyzing.
             self.ui.pushButton_2.setEnabled(False)
-            if is_item_in_json('test.json', self.media_source) == True:
+            if self.recognize_json == True and is_item_in_json('test.json', self.media_source) == True:
                 print(
                     'I noticed your mp4 being analyzed is in the test.json file,please decide whether you need it to be analyzed.')
                 temp_data = read_from_json('test.json', self.media_source)
@@ -784,36 +821,6 @@ class CustomUI(QMainWindow):
 
         self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
 
-        '''
-        while(self.vid.isOpened()):
-            QtWidgets.QApplication.processEvents()
-            img, self.image = self.vid.read()
-            if self.image is None: #None means the video has reached its end.
-                break
-            #self.image  = imutils.resize(self.image ,height = 480 )
-            #if self.slider_allow_auto_move==True:
-            #    self.ui.slider_time.setValue(self.current_frame/self.total_frame*10000)
-            re=self.process_with_AI()
-            if re==None:
-                self.emotion_mark_list.append(0)
-            else:
-                if re[2]==None:
-                    pass
-                else:
-                    self.emotion_mark_list.append(re[2])
-                    print("added")
-                    self.vid_writer.write(self.image)
-
-            #self.update()
-
-            self.current_frame+=1
-
-            self.ui.progressBar.setValue((self.current_frame/self.total_frame)*100)'''
-
-        # key = cv2.waitKey(1) & 0xFF
-        # if key == ord("q") or self.pause==True:
-        #    self.pause=False
-        #    break
 
     def process_seq_func(self):
         self.draw_align_point = False
@@ -825,17 +832,6 @@ class CustomUI(QMainWindow):
         self.current_frame = 0
         self.conversion_list_index = 0
 
-        # self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
-
-        # plt.plot(np.arange(0,len(self.emotion_mark_list)/self.fps,0.04), self.emotion_mark_list, 'g--')
-        # 与下面设置是一样的
-        # plt.plot(x, y, linestyle='--', color='g')
-        # plt.show()
-
-        # plt.savefig("emotion.png")
-
-        # self.commissure_seq=self.commissure_seq[0:len(self.commissure_seq)-1:2]
-        # #hotfix
         self.commissure_seq_temp = []
         self.emotion_mark_list_temp = []
         self.nasion_list_temp = []
@@ -965,6 +961,9 @@ class CustomUI(QMainWindow):
 
         plt.cla()
 
+        image = Image.open("commissure.png")
+        image.show()
+
         self.progressChanged.emit(100)  # In case the network failure.
 
         self.analyzed = True
@@ -1064,12 +1063,10 @@ class CustomUI(QMainWindow):
         print(self.ui.scene)  # you do not have to createa new scene.
 
     def landmarks_calculator(self):
-        # 检测人脸
         landmarks = detect_face(self.detector, self.image)
         transformed_landmarks_dict_list = []
         if landmarks is not None:
             self.landmarks = landmarks
-            # print('left_eye_x='+str(landmarks.part(36).x),'left_eye_y='+str(landmarks.part(36).y))
             '''notice:to make each append operation shorter, first we append the coordinates without offset.'''
             transformed_landmarks_dict_list.append({'center_x': landmarks[33][0],
                                                     'center_y': landmarks[33][1],

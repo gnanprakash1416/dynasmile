@@ -43,8 +43,12 @@ else:
 
 def load_model():
     model = MobileFaceNet([112, 112], 136)
+
+    current_directory = os.path.dirname(__file__)
+    parent_directory = os.path.dirname(current_directory)
+
     checkpoint = torch.load(
-        'checkpoint/mobilefacenet_model_best.pth.tar', map_location=map_location)
+        parent_directory+'/checkpoint/mobilefacenet_model_best.pth.tar', map_location=map_location)
     print('Use MobileFaceNet as backbone')
     model.load_state_dict(checkpoint['state_dict'])
     return model
