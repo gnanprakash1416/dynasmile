@@ -104,13 +104,13 @@ try:
 
         # 
 
-        shell.send(command+'\n')
+        #shell.send(command+'\n')
 
         time.sleep(1)
 
         output=shell.recv(10000).decode("utf-8")
 
-        print("shuchu:")
+        #print("shuchu:")
 
         print(output)
 

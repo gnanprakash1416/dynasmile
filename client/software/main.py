@@ -15,6 +15,7 @@ from library.test_batch_detections import load_model, detect_face
 from library.bucket_test import upload_video, upload_video_new
 from library.json_handler import append_tojson, is_item_in_json, read_from_json
 from library.another import manage_item
+from library.aws_connection import start_ec2_instance,stop_ec2_instance
 
 import socket
 from deepface import DeepFace
@@ -29,23 +30,13 @@ from PIL import Image
 import subprocess
 import argparse
 import time
+import logging
+import traceback
 
-
-current_path=os.path.abspath(__file__)
-current_folder=os.path.dirname(current_path)
-parent_folder=os.path.dirname(current_folder)
-upper_folder=os.path.dirname(parent_folder)
-
-server=manage_item(os.path.join(current_folder,'library','server.json'),"server")
-if server==2 or server==3:
-    server=manage_item(os.path.join(current_folder,'library','server.json'),"server")
-
-python_path=os.path.join(upper_folder,'venv','Scripts','python.exe')
-process=subprocess.Popen(['start','cmd','/k',python_path,
-os.path.join(current_folder,'library','para.py'),'--server',server],shell=True)
-
-print("loading dependencies...")
-time.sleep(20)
+def log_exception(exc_type, exc_value, exc_traceback):
+    if issubclass(exc_type, KeyboardInterrupt):
+        sys.exit(0)
+    logging.error("Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback))
 
 
 class Thread(QThread):
@@ -313,23 +304,9 @@ class CustomUI(QMainWindow):
         self.test_mode = False
 
         self.ready = False
-        '''This is the connection error handler that helps us to handle the situation when the internet disconnects when the program is just beginning to start.'''
-        try:
-            self.sio = self.start_client()
+        
+        self.start_ssh_connections()
 
-        except socketio.exceptions.ConnectionError as e:
-            print(str(e))
-            if 'refuse' in str(e):
-                print('please check the server and the 5000 port connection.Please check tabby if the connection is bulit then rerun this program. \nUse ALT 1,ALT2,ALT3 to start all the programs.\n ')
-            else:
-                print('please check the connection of 5000 port. Not able to resume. Please check tabby if the connection is bulit then rerun this program. \nUse ALT 1,ALT2,ALT3 to start all the programs.\n start the  server first then connect the 5000 port.')
-            try:
-                input(
-                    'press any key + enter if you make sure the things above are all done.')
-            except EOFError:
-                pass
-            self.sio = self.start_client()
-            print('successfully bypassed this issue...')
         self.ready = True
 
         self.disconnected = False
@@ -410,6 +387,52 @@ class CustomUI(QMainWindow):
         self.coord_offset = (0, 0)
 
         self.progressChanged.connect(self.ui.progressBar.setValue)
+
+    def start_ssh_connections(self):
+        max_retries = 5
+        attempts = 0
+        while True:
+            try:
+                self.sio = self.start_client()
+                self.ready = True
+                logging.info('Connected successfully.')
+                return  # successfully connect
+            except socketio.exceptions.ConnectionError as e:
+                message = self.handle_connection_error(e)
+                print(message)
+                attempts += 1
+                if attempts < max_retries:
+                    print(f'Retry attempt {attempts} in 5 seconds...')
+                    time.sleep(5)  # wait for 5 secs
+                else:
+                    # enough
+                    prompt = input("All retry attempts failed. Do you want to try again? (yes/no): ")
+                    if prompt.lower() == 'no':
+                        logging.info('Exiting program as user opted not to retry.')
+                        return  # exit
+                    elif prompt.lower() == 'yes':
+                        attempts = 0  # set attempt to  0 to restart
+                    else:
+                        print("Invalid input, exiting program.")
+                        return  # exit
+
+    def handle_connection_error(self, e):
+        """process ssh errors."""
+        error_message = str(e)
+        if 'refuse' in error_message:
+            message = (
+                'Please check the server and the 5000 port connection. '
+                'Ensure the connection is established, then rerun this program.\n'
+                'Use ALT 1, ALT 2, ALT 3 to start all the programs.\n'
+            )
+        else:
+            message = (
+                'Please check the connection of port 5000. Unable to resume. '
+                'Ensure the server is started first before connecting to port 5000.\n'
+                'Use ALT 1, ALT 2, ALT 3 to start all the programs.\n'
+            )
+        logging.error(message)
+        return message
 
     def start_client(self, arg=None):
         pass
@@ -1578,7 +1601,7 @@ class CustomUI(QMainWindow):
                 self.ui.landmark_list['incisor edge'] = MyItem(
                     incisor_point, self.ui.landmark_size)
                 self.ui.landmark_list['incisor edge'].inner_signal.mysignal.connect(
-                    self.refresh)  # 接通refresh
+                    self.refresh)  # connect to refresh
                 self.ui.scene.addItem(self.ui.landmark_list['incisor edge'])
                 print('added!!!!!!!!!!!!!!!!!!!!!!!"')
                 print(incisor_edge_x, incisor_edge_y)
@@ -1610,13 +1633,45 @@ class CustomUI(QMainWindow):
         finally:
             pass
 
+    def closeEvent(self, event):
+        stop_ec2_instance(instance_id, credentials_file)
+
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)  # 创建app，用 QApplication 类
-    cutomUI = CustomUI()
-    cutomUI.show()
-    sys.exit(app.exec_())
+    logging.basicConfig(
+    filename='error_log.txt',
+    level=logging.ERROR,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
+    sys.excepthook = log_exception
+
+    current_path=os.path.abspath(__file__)
+    current_folder=os.path.dirname(current_path)
+    parent_folder=os.path.dirname(current_folder)
+    upper_folder=os.path.dirname(parent_folder)
+
+    instance_id = 'i-034544d95b9703bfc'  # substance ID
+    credentials_file = os.path.join(current_folder,'library','ec2_config.json')
+
+    print("please wait for the EC2 server to start...")
+
+    try:
+        public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+        server=public_dns
+        python_path=os.path.join(upper_folder,'venv','Scripts','python.exe')
+        process=subprocess.Popen(['start','cmd','/k',python_path,
+        os.path.join(current_folder,'library','para.py'),'--server',server],shell=True)
+
+        print("loading dependencies...")
+        time.sleep(20)
+
+        app = QApplication(sys.argv)  # create app
+        cutomUI = CustomUI()
+        cutomUI.show()
+        sys.exit(app.exec_())
+    except:
+        stop_ec2_instance(instance_id, credentials_file)
 '''
 12.10 task: write_csv dialog choose different image.
 '''

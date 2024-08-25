@@ -118,7 +118,7 @@ cd The/path/to/your/project/directory
 python -m venv ./venv
 
 # Install the requirements for the local interface.
-./venv/Scripts/pip.exe install -r ./client/requirements.txt
+\venv\Scripts\pip.exe install -r \client\requirements.txt
 
 # Install web service to the web server
 python ./install_tools/install_service.py
