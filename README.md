@@ -87,68 +87,10 @@ python -m venv ./venv
 # Install the requirements for the local interface.
 ./venv/Scripts/pip.exe install -r ./client/requirements.txt
 
-
-
 ```
 
 
 
-The instructions below assumes that you already had one GPU EC2 instance(**AT LEAST G4DN.XLARGE**and **AT LEAST 100GB for storage**) to run on cloud:
-
-### Configuring EC2 instance
-
-# Connect to the EC2 instance via web connection through "EC2 instance connect"(You can see the picture above if you are correct) .
-# 
-
-
-
-# Create a Amazon account, and create an Amazon EC2 instance with g4dn.xlarge
-# For people who do this, you might have difficulties. Please feel free to contact dentistfrankchen@outlook.com
-
-# Clone the repository to local computer
-git clone https://github.com/dentistfrankchen/dynasmile.git
-
-# Navigate to the project directory
-cd The/path/to/your/project/directory
-
-# Copy Amazon pem file to the ./client folder
-# Make sure the python version of your computer is python==3.8.x
-# Create python environment
-python -m venv ./venv
-
-# Install the requirements for the local interface.
-./venv/Scripts/pip.exe install -r ./client/requirements.txt
-
-# Install web service to the web server
-python ./install_tools/install_service.py
-
-```shell
-# Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
-
-# Ensure Git is installed
-# Visit https://git-scm.com to download and install console Git if not already installed
-
-# Create a Amazon account, and create an Amazon EC2 instance with g4dn.xlarge
-# For people who do this, you might have difficulties. Please feel free to contact dentistfrankchen@outlook.com
-
-# Clone the repository to local computer
-git clone https://github.com/dentistfrankchen/dynasmile.git
-
-# Navigate to the project directory
-cd The/path/to/your/project/directory
-
-# Copy Amazon pem file to the ./client folder
-# Make sure the python version of your computer is python==3.8.x
-# Create python environment
-python -m venv ./venv
-
-# Install the requirements for the local interface.
-\venv\Scripts\pip.exe install -r \client\requirements.txt
-
-# Install web service to the web server
-python ./install_tools/install_service.py
-
-```
 ## 📚 Documentation 
 
 ### Starting the program
@@ -158,21 +100,17 @@ python ./install_tools/install_service.py
 # Navigate to the project directory
 cd The/path/to/your/project/directory
 
-# Use the python program in venv folder to run the server-configuration.py
-./venv/Scripts/python.exe ./client/server-configuration.py
-
-# After the web service has been provoked, you can start the main interface.
+# You can start the main interface.
 ./venv/Scripts/python.exe ./client/software/main.py
 
 ```
 
 ### Running the program to conduct smile analysis
-1. Upload a video by clicking **'import_media' button**.
+1. Upload a video by clicking **Drag/Drop panel**.
 2. The program then uploads the video, displaying the process through the **progress bar**.
-3. When the progress bar reaches 100 percent, the video will be automatically played.
-4. Users can view the commissure.png in the project directory to click the **'pause' button** choose the where to pause to conduct the measurements and display the landmarks.
-5. The user hits the **'load_from_algo' button** to render the landmarks. The measurements will be calculated and the same time.
-6. The user clicks the **'save_to_csv'** button, and the coordinates of the landmarks as well as the measurements will be saved in CSV files.
+3. When the progress bar reaches 100 percent, frame with greatest smile intensity will be automatically played.
+4. The landmarks and measurements will be automatically displayed.
+5. The user clicks the **'Save csv'** button, and the coordinates of the landmarks as well as the measurements will be saved in CSV files.
 
 ## 🤝 Feedback and Contributions
 
