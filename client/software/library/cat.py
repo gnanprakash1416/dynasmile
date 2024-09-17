@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from library.test_sliding import EmotionSlider
+from library.DragDropWidget import DragDropWidget
+import os
 
 
 class Ui_MainWindow(object):
@@ -26,7 +29,8 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label.setMinimumSize(QtCore.QSize(640, 480))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("OIP-C.jpg"))
+        current_path=os.path.abspath(__file__)
+        self.label.setPixmap(QtGui.QPixmap(os.path.join(os.path.dirname(current_path),"OIP-C.jpg")).scaled(1000, 618, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
         self.label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
@@ -50,15 +54,10 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.horizontalLayout_3, 4, 0, 1, 1)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalSlider = QtWidgets.QSlider(self.gridLayoutWidget)
-        self.verticalSlider.setMaximum(100)
-        self.verticalSlider.setOrientation(QtCore.Qt.Vertical)
-        self.verticalSlider.setObjectName("verticalSlider")
-        self.horizontalLayout_2.addWidget(self.verticalSlider)
-        self.verticalSlider_2 = QtWidgets.QSlider(self.gridLayoutWidget)
-        self.verticalSlider_2.setOrientation(QtCore.Qt.Vertical)
-        self.verticalSlider_2.setObjectName("verticalSlider_2")
-        self.horizontalLayout_2.addWidget(self.verticalSlider_2)
+        # 用 DragDropWidget 替换原有的两个垂直滑动条
+        self.dragdrop_widget = DragDropWidget()
+        self.horizontalLayout_2.addWidget(self.dragdrop_widget)
+        # 添加 DragDropWidget 到网格布局
         self.gridLayout.addLayout(self.horizontalLayout_2, 0, 1, 1, 1)
         self.textEdit_2 = QtWidgets.QTextEdit(self.gridLayoutWidget)
         self.textEdit_2.setMaximumSize(QtCore.QSize(16777215, 80))
@@ -87,15 +86,17 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_2, 7, 0, 1, 1)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.slider_time = QtWidgets.QSlider(self.gridLayoutWidget)
+        self.initial_scores = [0, 0, 25, 50, 75, 100]  # Example scores, adjust as necessary
+        # Replace QSlider with EmotionSlider
+        self.slider_time = EmotionSlider(self.initial_scores, QtCore.Qt.Horizontal, self.gridLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.slider_time.sizePolicy().hasHeightForWidth())
         self.slider_time.setSizePolicy(sizePolicy)
-        self.slider_time.setMaximum(10000)
+        # Set the maximum value based on the number of scores
+        self.slider_time.setMaximum(len(self.initial_scores) - 1)  # Align with the number of scores
         self.slider_time.setSingleStep(1)
-        self.slider_time.setOrientation(QtCore.Qt.Horizontal)
         self.slider_time.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.slider_time.setTickInterval(1)
         self.slider_time.setObjectName("slider_time")
@@ -147,15 +148,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "DynaSmile"))
-        self.pushButton.setText(_translate("MainWindow", "pause"))
-        self.pushButton_2.setText(_translate("MainWindow", "import_media"))
-        self.pushButton_readcsv.setText(_translate("MainWindow", "load_landmarks_from_csv"))
-        self.pushButton_render.setText(_translate("MainWindow", "load_landmarks_from_algo"))
-        self.pushButton_writecsv.setText(_translate("MainWindow", "save_landmarks_to_csv"))
-        self.pushButton_clear.setText(_translate("MainWindow", "clear_landmarks"))
+        self.pushButton.setText(_translate("MainWindow", "Pause"))
+        self.pushButton_2.setText(_translate("MainWindow", "Start"))
+        self.pushButton_readcsv.setText(_translate("MainWindow", "Read csv"))
+        self.pushButton_render.setText(_translate("MainWindow", "Detect landmarks"))
+        self.pushButton_writecsv.setText(_translate("MainWindow", "Save csv"))
+        self.pushButton_clear.setText(_translate("MainWindow", "Clear landmarks"))
         self.label_2.setText(_translate("MainWindow", "Welcome to the DynaSmile system!"))
-        self.time_setter.setToolTip(_translate("MainWindow", "current time"))
+        self.time_setter.setToolTip(_translate("MainWindow", "Current time"))
         self.label_4.setText(_translate("MainWindow", "Programmed by:\n"
-" Frank Chen"))
+" Ke(Frank) Chen"))
         self.commandLinkButton.setText(_translate("MainWindow", "settings"))
 from library.my_widgets import RightClickLineEdit

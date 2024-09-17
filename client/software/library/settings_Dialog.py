@@ -7,28 +7,63 @@ from library.settings import Ui_Dialog
 import cv2
 import imutils
 import csv
+import os
+import json
 
 
-class CustomUI(QDialog):
+class set_Dialog(QDialog):
+    def load_config(self, file_path):
+        """ Load configuration values from a JSON file. """
+        try:
+            with open(file_path, 'r') as file:
+                config = json.load(file)
+                self.incisor_edge_index = config.get("incisor_edge_index")
+                self.cuspid_edge_index = config.get("cuspid_edge_index")
+                self.conversion_factor = config.get("conversion_factor")
+                self.incisor_length = config.get("incisor_length")
+        except FileNotFoundError:
+            print(f"Error: The configuration file {file_path} was not found.")
+        except json.JSONDecodeError:
+            print("Error: JSON decode error.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    def save_config(self, file_path):
+        """ Save configuration values to a JSON file. """
+        config = {
+            "incisor_edge_index": self.incisor_edge_index,
+            "cuspid_edge_index": self.cuspid_edge_index,
+            "conversion_factor": self.conversion_factor,
+            "incisor_length": self.incisor_length
+        }
+        
+        try:
+            with open(file_path, 'w') as file:  # Open the file in write mode
+                json.dump(config, file, indent=4)  # Writing JSON data with indentation
+            logging.info("Configuration saved successfully.")
+        except IOError as e:
+            logging.error(f"An IOError occurred: {e}")
+        except Exception as e:
+            logging.error(f"An unexpected error occurred while saving configuration: {e}")
+
     def __init__(self, parent=None):
         super().__init__(parent)  # 调用父类构造函数，self 就是一个 QMainWindow 对象
         self.ui = Ui_Dialog()  # 创建UI 对象
         self.ui.setupUi(self)  # 构造UIm
 
-        self.incisor_edge_index = 0.5
+        current_path=os.path.abspath(__file__)
+        current_folder=os.path.dirname(current_path)
 
-        self.cuspid_edge_index = 0.5
+        self.config_file=os.path.join(current_folder,'config.json')
 
-        self.conversion_factor = 6.5  # the distance of middle face.
-
-        self.incisor_length = 1.0
+        self.load_config(self.config_file)
 
         self.ui.lineEdit.setText(str(self.conversion_factor))
 
         self.ui.lineEdit_2.setText(str(self.incisor_length))
 
         self.ui.buttonBox.accepted.connect(self.ok_api)
-
+        self.ui.checkBox.setChecked(True) 
         self.ui.checkBox.stateChanged.connect(self.display_slide_bars)
 
         self.ui.verticalSlider.valueChanged.connect(
@@ -124,6 +159,7 @@ class CustomUI(QDialog):
         self.send_cuspid()
         self.conv_factor()
         self.get_incisor_length()
+        self.save_config(self.config_file)
         print("ok")
         pass
 
@@ -168,6 +204,6 @@ class CustomUI(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)  # 创建app，用 QApplication 类
-    cutomUI = CustomUI()
+    cutomUI = set_Dialog()
     cutomUI.show()
     sys.exit(app.exec_())

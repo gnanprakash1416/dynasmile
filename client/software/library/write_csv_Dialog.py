@@ -9,7 +9,7 @@ import imutils
 import csv
 
 
-class CustomUI(QDialog):
+class write_Dialog(QDialog):
     mysignal = QtCore.pyqtSignal(str)
 
     identity_signal = QtCore.pyqtSignal(str)
@@ -95,6 +95,6 @@ class CustomUI(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)  # 创建app，用 QApplication 类
-    cutomUI = CustomUI()
+    cutomUI = write_Dialog()
     cutomUI.show()
     sys.exit(app.exec_())

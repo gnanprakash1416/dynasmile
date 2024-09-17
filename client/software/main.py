@@ -8,9 +8,9 @@ import imutils
 import csv
 
 from library.cat import Ui_MainWindow
-from library.read_csv_Dialog import CustomUI as read_Dialog
-from library.write_csv_Dialog import CustomUI as write_Dialog
-from library.settings_Dialog import CustomUI as set_Dialog
+from library.read_csv_Dialog import read_Dialog
+from library.write_csv_Dialog import write_Dialog
+from library.settings_Dialog import set_Dialog
 from library.test_batch_detections import load_model, detect_face
 from library.bucket_test import upload_video, upload_video_new
 from library.json_handler import append_tojson, is_item_in_json, read_from_json
@@ -26,7 +26,6 @@ import socketio
 import json
 import boto3
 
-from PIL import Image
 import subprocess
 import argparse
 import time
@@ -62,15 +61,6 @@ class disconnection__Thread(QThread):
     def run(self):
         # input('After the connection is recovered, press any key to resume: ')
         print('After the connection is recovered, everything is being recovered...now sending requests...')
-
-
-class tabyy__Thread(QThread):
-    def __init__(self):
-        super(tabyy__Thread, self).__init__()
-
-    def run(self):
-        # input('After the connection is recovered, press any key to resume: ')
-        input('Please check tabby...use ALT1 ALT2 ALT3 to start all the necessary pros. When everything is checked, press any key+enter to continue...')
 
 
 '''This is the inner signal inside the point object. This is fired to refresh the displaying pane.'''
@@ -216,8 +206,25 @@ class MyItem(QtWidgets.QGraphicsEllipseItem):
 class CustomUI(QMainWindow):
     '''The signal to change the progress bar. Because of the threads, you cannot change it directly.'''
     progressChanged = QtCore.pyqtSignal(int)
+    render_signal = QtCore.pyqtSignal()
+    def load_config(self, file_path):
+        """ Load configuration values from a JSON file. """
+        try:
+            with open(file_path, 'r') as file:
+                config = json.load(file)
+                self.incisor_edge_index = config.get("incisor_edge_index")
+                self.cuspid_edge_index = config.get("cuspid_edge_index")
+                self.conversion_factor = config.get("conversion_factor")
+                self.incisor_length = config.get("incisor_length")
+        except FileNotFoundError:
+            print(f"Error: The configuration file {file_path} was not found.")
+        except json.JSONDecodeError:
+            print("Error: JSON decode error.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
     def __init__(self, parent=None):
+        self.load_config(os.path.join(current_folder,'library','config.json'))
 
         # iheriting from QMainWndow
         super().__init__(parent)
@@ -228,6 +235,7 @@ class CustomUI(QMainWindow):
 
         # load the landmark list. This list is used to store Myitem objects.
         self.ui.landmark_list = {}
+        #thread_checker('my func')
         self.ui.landmark_size = 10  # to do: changable size
         # load the dlib face shape predictor.
         # self.predictor = dlib.shape_predictor(os.path.abspath(os.path.join(os.getcwd(), ".."))+"\supporting_files\shape_predictor_68_face_landmarks\shape_predictor_68_face_landmarks.dat")
@@ -237,19 +245,13 @@ class CustomUI(QMainWindow):
         self.detector.eval()  # important
 
         self.model = DeepFace.build_model("Emotion")
-        self.emotion_labels = [
-            'angry',
-            'disgust',
-            'fear',
-            'happy',
-            'sad',
-            'surprise',
-            'neutral']
+        
         self.face_cascade = cv2.CascadeClassifier(
             cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
         # set the current frame that this program is working on.
         self.current_frame = 0  # the 0th frame.
+        #self.max_frame=0  #the frame with the greatest smile intensity.
         self.slider_allow_auto_move = True
 
         # set the status to be needing analyze. In the loadImage() function, If
@@ -274,21 +276,14 @@ class CustomUI(QMainWindow):
 
         self.conversion_factor_video = 1
 
-        self.display_tooth_landmarks = False
+        self.display_tooth_landmarks = True
 
         self.save_img = False
 
         self.recognize_json=False #set to true if you want to use commissure.json to verify whether the file has been analyzed.
 
         # the factor used to measure distance(the distance of middle face.)[Now
-        # is the distance betwwen inner canthus--in millimeters.]
-        self.conversion_factor = 35
-
-        self.incisor_edge_index = 0.5
-
-        self.cuspid_edge_index = 0.5
-
-        self.incisor_length = 1.0
+        # is the distance betwwen inner canthus--in millimeters.
 
         self.Pause = False
 
@@ -339,10 +334,11 @@ class CustomUI(QMainWindow):
         self.ui.pushButton_render.clicked.connect(self.landmarks_calculator)
         self.ui.pushButton_readcsv.clicked.connect(self.readcsv)
         self.ui.pushButton_writecsv.clicked.connect(self.writecsv)
-        self.ui.slider_time.sliderReleased.connect(self.time_changed)
-        self.ui.slider_time.sliderMoved.connect(self.overcome_zig)
+        self.ui.slider_time.sliderReleasedSignal.connect(self.time_changed)
+        #self.ui.slider_time.sliderMoved.connect(self.overcome_zig)
         self.ui.time_setter.mysignal.connect(self.change_time)
-
+        self.ui.dragdrop_widget.itemDropped.connect(self.on_item_dropped)
+        self.render_signal.connect(self.landmarks_calculator)
         self.ui.lineEdit_media.textChanged.connect(self.media_monitor)
 
         self.ui.commandLinkButton.clicked.connect(self.open_settings)
@@ -376,11 +372,11 @@ class CustomUI(QMainWindow):
         # (0,0) point is in the correct place.
         self.ui.graphicsView.scene().setSceneRect(-200, -200, 400, 400)
 
-        # print(self.ui.label.pixmap().rect())
-
         # set the 'pause' botton to not enabled.
         self.ui.pushButton.setEnabled(False)
+        self.ui.pushButton_2.setEnabled(False)
         self.ui.pushButton_render.setEnabled(False)
+        self.ui.slider_time.setEnabled(False)
         self.initial_state()
         self.tmp = None
 
@@ -399,7 +395,7 @@ class CustomUI(QMainWindow):
                 return  # successfully connect
             except socketio.exceptions.ConnectionError as e:
                 message = self.handle_connection_error(e)
-                print(message)
+                print(f"Error message from start_ssh_connection.{message}")
                 attempts += 1
                 if attempts < max_retries:
                     print(f'Retry attempt {attempts} in 5 seconds...')
@@ -465,23 +461,11 @@ class CustomUI(QMainWindow):
             self.face_not_detected = self.AI_dict['face_not_detected']
             self.face_greater_than_one_cv2_only = self.AI_dict['face_greater_than_one_cv2_only']
             self.face_greater_than_one_mobile = self.AI_dict['face_greater_than_one_mobile']
-            # self.dlib_only_emotion_list=self.AI_dict['dlib_only_emotion_list']
-            # print(self.dlib_only_emotion_list)
             '''We need to document the commissure seq.'''
             self.nasion_list = self.AI_dict['nasion_list']
             self.conversion_list = self.AI_dict['conversion_list']
             self.leftx_eye_list = self.AI_dict['leftx_eye_list']
             self.lefty_eye_list = self.AI_dict['lefty_eye_list']
-            '''with open('commissure_list.json','a') as f:  #追加模式
-                json.dump({'filename':self.media_source,
-                           'fps':self.fps,
-                           'emotion_mark_list':self.emotion_mark_list,
-                           'commissure_seq':self.commissure_seq,
-                           'nasion_list':self.nasion_list,
-                           'conversion_list':self.conversion_list,
-                           'leftx_eye_list':self.leftx_eye_list,
-                           'lefty_eye_list':self.lefty_eye_list
-                           },f) '''
             export_data = {'filename': self.media_source,
                            'fps': self.fps,
                            'emotion_mark_list': self.emotion_mark_list,
@@ -496,8 +480,13 @@ class CustomUI(QMainWindow):
             # now you can press the pause button.
             self.ui.pushButton.setEnabled(True)
             self.ui.pushButton_2.setEnabled(False)
-            self.display()
-            self.mp4_state()
+            
+            self.display("on peak")
+            self.allow_landmarking()
+            
+            self.render_signal.emit()
+            '''VERY IMPORTANT:Do not use self.landmarks_calculator here.
+            It will cause the thread to have huge mistakes.'''
             print(json.loads(data)['name'])
             print(json.loads(data)['emotion_list'])
             print('not detected rate: ' +
@@ -537,19 +526,23 @@ class CustomUI(QMainWindow):
 
     def media_monitor(self):
         if self.ui.lineEdit_media.text() == '':
-            self.ui.pushButton_2.setText('import new media')
+            #self.ui.pushButton_2.setText('import new media')
+            self.ui.dragdrop_widget.enableDragDrop()
+            self.ui.dragdrop_widget.cross_image_label.show()
             self.requires_analyze = True
             self.analyzed = False  # important
-            '''self.vid.release()
-            del self.vid
-            importlib.reload(cv2)'''
             self.current_frame = 0
             self.initial_state()
+            self.ui.slider_time.setEnabled(False)
         else:
             pass
 
     def my_slot(self):  # test function used to test slot.
-        # self.ui.pushButton.setText("oo")
+        try:
+            time.sleep(0.1)
+            self.ui.pushButton_clear.click()
+        except:
+            pass
         pass
 
     '''The pause function works with pause button.
@@ -567,41 +560,45 @@ class CustomUI(QMainWindow):
         # When the pause button is hit, you can hit the start button.
         self.ui.pushButton_2.setEnabled(True)
 
+
     '''When you change the value of time setter and right click, the change_time function works to change the value of the horizontal sliding bar.
     It calculates the frame that needs to be calculated and bring it there by setting self.current_frame.
     It also reads that frame and renders it to the label by self.update()
     '''
 
     def change_time(self):
-        self.ui.slider_time.setValue(
-            int(float(self.ui.time_setter.text()) / (self.total_frame / self.fps) * 10000))
-
+       # Set the slider value based on the given time input in relation to the total frames and fps
+        #self.ui.slider_time.setValue(
+        #    int(float(self.ui.time_setter.text()) *self.fps)
+        #)
+        self.ui.slider_time.location=int(float(self.ui.time_setter.text()) *self.fps)
+        self.ui.slider_time.update()
+        # Calculate the target frame based on the time input and frames per second (fps)
         frame_target = int(float(self.ui.time_setter.text()) * self.fps)
-
+        # Update the current frame to the target frame
         self.current_frame = frame_target
-
+        # Check if the video capture is opened and set the current frame position
         if self.vid.isOpened():
             self.vid.set(cv2.CAP_PROP_POS_FRAMES, frame_target)
-
-        self.ui.time_setter.setText(str(float((self.current_frame+1) / self.fps)))
-
+        # Update the time setter text to reflect the current frame as time in seconds
+        self.ui.time_setter.setText(str(float((self.current_frame + 1) / self.fps)))
+        # Read the next frame from the video capture
         img, self.image = self.vid.read()
-
+        # Resize the captured image for display
         self.image = imutils.resize(self.image, height=618)
-
+        # Trigger an update to refresh the UI or display the new image
         self.update()
-
     '''only the import_media can be used.'''
 
     def initial_state(self):
-        self.ui.pushButton_2.setEnabled(True)
+        self.ui.pushButton_2.setEnabled(False)
         self.ui.pushButton.setEnabled(False)
         self.ui.pushButton_render.setEnabled(False)
         self.ui.pushButton_readcsv.setEnabled(False)
         self.ui.pushButton_writecsv.setEnabled(False)
         self.ui.pushButton_clear.setEnabled(False)
 
-    def mp4_state(self):
+    def allow_landmarking(self):
         self.ui.pushButton_render.setEnabled(True)
         self.ui.pushButton_readcsv.setEnabled(True)
         self.ui.pushButton_writecsv.setEnabled(True)
@@ -637,6 +634,41 @@ class CustomUI(QMainWindow):
     def send_signal(self, data):
         self.progressChanged.emit(data)
 
+    def start_video_capture(self, reduce_fps=False):  # Add reduce_fps parameter
+        self.ui.dragdrop_widget.cross_image_label.hide()
+        if self.media_source:  # Check if media source is not empty
+            try:
+                if not self.analyzed:  # If the video has not been analyzed yet
+                    video_source = self.media_source
+                    self.vid = cv2.VideoCapture(video_source)  # Capture video from the given source
+                    print("Ready to capture new file.")
+                    # Start a new thread to upload the video
+                    thread = Thread(self.s3_client, video_source, 'frank--bucket')
+                    thread.start()  # Start the thread
+                    thread.wait()   # Use wait() to wait for the thread to finish
+                else:
+                    # Handle previously analyzed video
+                    self.vid = cv2.VideoCapture("myvideo.mp4")  # Load the default video
+                # Optionally reduce the capture frame rate
+                if reduce_fps:
+                    original_fps = self.vid.get(cv2.CAP_PROP_FPS)
+                    self.vid.set(cv2.CAP_PROP_FPS, original_fps / 2)  # Reduce the frame rate by half
+                # Update the button text to indicate the next action
+                self.ui.pushButton_2.setText("Start")
+            except Exception as e:  # Catch a more specific exception
+                print(f"An error occurred: {e}")  # Print the error message for debugging
+            
+            #try:
+            #    self.update() #reloading can zoom to normal
+            #except:pass
+        else:
+            print("No media source provided.")  # Provide feedback if media source is empty
+
+    def on_item_dropped(self,media):
+        self.media_source = str(media)
+        self.ui.lineEdit_media.setText(self.media_source)
+        self.loadImage()
+
     def loadImage(self):
         self.fps = 25
 
@@ -650,99 +682,33 @@ class CustomUI(QMainWindow):
         """
         '''Below is the IP filter
         '''
-        if self.ui.lineEdit_media.text() == '':
-            self.media = QFileDialog.getOpenFileName(
-                self, "choose media", "C:/", "(*.jpg;*.mp4)")
-            self.media_source = str(self.media[0])
-            self.ui.lineEdit_media.setText(self.media_source)
 
-        if self.media_source == '':
-            return
+        self.start_video_capture(reduce_fps=False)
 
-        if os.path.splitext(self.media_source)[-1] == '.jpg':
-            self.pic_state()
-            image = cv2.imdecode(
-                np.fromfile(
-                    self.media_source,
-                    dtype=np.uint8),
-                cv2.IMREAD_COLOR)
-            # image=cv2.imread(self.media_source)
 
-            # self.ui.label.setGeometry(QtCore.QRect(95, 29, image.shape[0],image.shape[1]))
-            image, width, height = self.setPhoto_with_proper_height(image)
-            self.image = image
-            self.ui.graphicsView.setGeometry(
-                QtCore.QRect(95, 29, width, height))
-            print(width, height)
-
-            # self.ui.pushButton_render.setEnabled(True) #after loading the
-            # image, the render button can be pushed.
-            return
-
-        '''Processing the video, either from real-time recording or local mp4.
-        '''
-
-        # cam = False # True for webcam
-
-        # self.ui.graphicsView.setGeometry(QtCore.QRect(95, 29, 640,480)) # set
-        # the size policy to preferred!!!
-
-        if not self.media_source == '':
-            try:
-                if self.analyzed == False:
-                    self.vid = cv2.VideoCapture(self.media_source)
-                    print("ready to capture new file.")
-                    thread = Thread(
-                        self.s3_client,
-                        self.media_source,
-                        'frank--bucket')
-                    thread.start()
-                    thread.wait()
-                    # upload_video_new(self.s3_resource,self.media_source,'frank--bucket',)
-                else:
-                    self.vid = cv2.VideoCapture("myvideo.mp4")
-                    # upload_video(self.s3_resource,"myvideo.mp4",'frank--bucket',)
-                self.vid.set(
-                    cv2.CAP_PROP_FPS, self.vid.get(
-                        cv2.CAP_PROP_FPS) / 2)
-                self.ui.pushButton_2.setText("start")
-            except BaseException:
-                return
-        else:
-            return
-
+        # Get the total number of frames and frames per second (fps) from the video
         self.total_frame = int(self.vid.get(cv2.CAP_PROP_FRAME_COUNT))
         self.fps = int(self.vid.get(cv2.CAP_PROP_FPS))
-        self.video_duration = self.total_frame / self.fps
-
+        self.video_duration = self.total_frame / self.fps  # Calculate total video duration
+        # Reset current frame if it exceeds total frames
         if not self.current_frame < self.total_frame:
             self.current_frame = 0
-
+        # Debug output for current frame and analysis status
         print(self.current_frame)
         print(self.requires_analyze)
-
+        # Set the position of the video capture to the current frame
         self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
-
-        cnt = 0
-        frames_to_count = 20
-        st = 0
-        fps = 0
-
-        self.emotion_labels = [
-            'angry',
-            'disgust',
-            'fear',
-            'happy',
-            'sad',
-            'surprise',
-            'neutral']
-
-        if self.requires_analyze == True:
-            # you cannot press the start button when it is analyzing.
+        
+        # Check if analysis is required
+        if self.requires_analyze:
+            # Disable the start button when analyzing
             self.ui.pushButton_2.setEnabled(False)
-            if self.recognize_json == True and is_item_in_json('test.json', self.media_source) == True:
-                print(
-                    'I noticed your mp4 being analyzed is in the test.json file,please decide whether you need it to be analyzed.')
+            self.ui.slider_time.setEnabled(False)
+            
+            # Check if the current media source is in the JSON file for recognition
+            if self.recognize_json and is_item_in_json('test.json', self.media_source):
+                print('Your mp4 is being analyzed; please decide if you need it to be analyzed.')
+                # Read data from JSON and update the media source and related parameters
                 temp_data = read_from_json('test.json', self.media_source)
                 self.media_source = temp_data['filename']
                 self.fps = temp_data['fps']
@@ -752,45 +718,44 @@ class CustomUI(QMainWindow):
                 self.conversion_list = temp_data['conversion_list']
                 self.leftx_eye_list = temp_data['leftx_eye_list']
                 self.lefty_eye_list = temp_data['lefty_eye_list']
-                # self.process_seq_func()
-                self.progressChanged.emit(100)  # In case the network failure.
-
+                # Emit progress change event
+                self.progressChanged.emit(100)  # Emit progress in case of network failure
+                # Mark the video as analyzed
                 self.analyzed = True
-
+                # Restart video capture from a default video source
                 self.vid = cv2.VideoCapture("myvideo.mp4")
-                # set to the first frame.
-                self.vid.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                self.vid.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Set to the first frame
+                # Update video properties after restarting the capture
                 self.total_frame = int(self.vid.get(cv2.CAP_PROP_FRAME_COUNT))
                 self.fps = int(self.vid.get(cv2.CAP_PROP_FPS))
                 self.current_frame = 0
-
+                # Update the graphics view size when the analysis has finished
                 self.ui.graphicsView.setGeometry(
                     QtCore.QRect(
                         95,
                         29,
-                        self.vid.get(
-                            cv2.CAP_PROP_FRAME_WIDTH) /
-                        self.vid.get(
-                            cv2.CAP_PROP_FRAME_HEIGHT) *
-                        618,
-                        618))  # change the graphicsview size when the analyzing has finished.
-
+                        self.vid.get(cv2.CAP_PROP_FRAME_WIDTH) /
+                        self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT) * 618,
+                        618)
+                )
+                # Disable analysis requirement and enable pause button
                 self.requires_analyze = False
-                # now you can press the pause button.
                 self.ui.pushButton.setEnabled(True)
                 self.ui.pushButton_2.setEnabled(False)
+                # Call display and state functions
                 self.display()
-                self.mp4_state()
+                self.allow_landmarking()
             else:
-                self.analyze()
+                # Start analysis if no prior analysis is required
+                self.load_first_frame()
         else:
-            # now you can press the pause button.
+            # Enable pause button if analysis is complete
             self.ui.pushButton.setEnabled(True)
             self.ui.pushButton_2.setEnabled(False)
-            self.display()
-            # meaninng it has finished analyzing.
+            self.display()  # Update display
 
-    def analyze(self):
+
+    def load_first_frame(self):
         '''new function. save the video. to filter the emotion.'''
         # height=self.vid.get(cv2.CAP_PROP_FRAME_WIDTH)
         try:
@@ -918,14 +883,14 @@ class CustomUI(QMainWindow):
                     cv2.rectangle(
                         new_img,
                         (start_x,
-                         start_y),
+                            start_y),
                         (start_x +
-                         resized_img.shape[1],
+                            resized_img.shape[1],
                             start_y +
                             resized_img.shape[0]),
                         (0,
-                         255,
-                         0),
+                            255,
+                            0),
                         2)
 
                 self.vid_writer.write(new_img)
@@ -947,7 +912,9 @@ class CustomUI(QMainWindow):
         '''to be done next'''
         self.vid_writer.release()
 
-        self.commissure_seq = self.commissure_seq_temp
+        #smoothed_commissure_seq_temp = adaptive_savitzky_golay_filter(self.commissure_seq_temp, max_window_length=11, polyorder=6, threshold=0.05)
+        #self.commissure_seq=scale_to_int(smoothed_commissure_seq_temp)
+        self.commissure_seq=self.commissure_seq_temp
         self.emotion_mark_list = self.emotion_mark_list_temp
         self.nasion_list = self.nasion_list_temp
 
@@ -980,12 +947,14 @@ class CustomUI(QMainWindow):
                     x[i], ymax), xytext=(
                     0, 0), textcoords='offset points')
 
+        self.max=round(x[i], 2)*self.fps
+
         plt.savefig("commissure.png")
 
         plt.cla()
-
-        image = Image.open("commissure.png")
-        image.show()
+        
+        #image = Image.open("commissure.png")
+        #image.show()
 
         self.progressChanged.emit(100)  # In case the network failure.
 
@@ -997,45 +966,58 @@ class CustomUI(QMainWindow):
         self.fps = int(self.vid.get(cv2.CAP_PROP_FPS))
         self.current_frame = 0
         self.conversion_list_index = 0
+        print(self.commissure_seq)
+        self.ui.slider_time.update_scores(self.commissure_seq)
 
-    def display(self):
-
-        while (self.vid.isOpened()):
-            QtWidgets.QApplication.processEvents()
+    def display(self,mode="from beginning"):
+        self.ui.slider_time.setEnabled(True)
+        if mode=="on peak":
+            self.current_frame= self.max
+            self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
             img, self.image = self.vid.read()
-            cv2.waitKey(33)
-            # None means the video has reached its end.
-            if self.current_frame == self.total_frame - 1:
-                self.current_frame = 0
-                self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
-                self.ui.pushButton.click()  # hit the pause button by itself.
-            # to display more clearly.
             self.image = imutils.resize(self.image, height=618)
-            if self.slider_allow_auto_move == True:
-                self.ui.slider_time.setValue(
-                    self.current_frame / self.total_frame * 10000)
-
-            # self.emotion_mark_list.append(self.process_with_AI()[2])
-            '''new function.'''
-            try:
-                # set the value to the possibility of happiness.
-                self.ui.verticalSlider.setValue(
-                    self.commissure_seq[self.current_frame])
-                # use tooltip so you can visualize the current possibility.
-                self.ui.verticalSlider.setToolTip(
-                    str(self.commissure_seq[self.current_frame]))
-            except BaseException:
-                pass
-
             self.update()
+            self.Pause = False
+            self.ui.pushButton.setEnabled(False)
+            self.ui.pushButton_2.setEnabled(True)
+            self.ui.time_setter.setText(str(float(self.current_frame / self.fps)))
+            print("allow_landmarking executed.")
+            self.ui.slider_time.location=self.current_frame
+            print(f"DISPLAY changed slider_time.location to {self.ui.slider_time.location}")
+            self.ui.slider_time.update()
+            print(f"slider_time UPDATED.")
+        if mode=="from beginning":
+            while (self.vid.isOpened()):
+                QtWidgets.QApplication.processEvents()
+                img, self.image = self.vid.read()
+                cv2.waitKey(33)
+                # None means the video has reached its end.
+                if self.current_frame == self.total_frame - 1:
+                    self.current_frame = 0
+                    self.vid.set(cv2.CAP_PROP_POS_FRAMES, self.current_frame)
+                    self.ui.pushButton.click()  # hit the pause button by itself.
+                # to display more clearly.
+                self.image = imutils.resize(self.image, height=618)
+                if self.slider_allow_auto_move == True:
+                    #self.ui.slider_time.setValue(
+                    #    self.current_frame)
+                    self.ui.slider_time.location=self.current_frame
+                    self.ui.slider_time.update()
 
-            self.current_frame += 1
+                # self.emotion_mark_list.append(self.process_with_AI()[2])
+                '''new function.'''
 
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord("q") or self.Pause == True:  # detect the pause
-                self.Pause = False
-                self.ui.pushButton_2.setEnabled(True)
-                break
+                self.update()
+
+                self.current_frame += 1
+
+                key = cv2.waitKey(1) & 0xFF
+                if key == ord("q") or self.Pause == True:  # detect the pause
+                    self.Pause = False
+                    self.ui.pushButton_2.setEnabled(True)
+                    self.update()
+                    break
+            self.ui.pushButton_render.click()
 
     def setPhoto(self, image):
         """ This function will take image input and resize it
@@ -1153,7 +1135,7 @@ class CustomUI(QMainWindow):
                 transformed_landmarks_dict_list.append({'center_x': cer_of_incisor_x,
                                                         'center_y': cer_of_incisor_y,
                                                         'name': 'cervical part of incisor'})
-                print(self.incisor_edge_index)
+                print(f"incisor_edge_index from LANDMARKS_CALCULATOR:{self.incisor_edge_index}")
             # transformed_landmarks_dict.
             '''now we add the offset and calculate.'''
             for value in transformed_landmarks_dict_list:
@@ -1178,8 +1160,8 @@ class CustomUI(QMainWindow):
         # landmarks.
         landmarks = self.landmarks
         if not self.cord_from_name("right outer smile commissure")==0:
-            self.angles = {'canthus and smile commissure divation': str(self.angle_between_four_points(self.cord_from_name("right outer canthus"), self.cord_from_name("left outer canthus"), self.cord_from_name("right outer smile commissure"), self.cord_from_name("left outer smile commissure"))),
-                        'intercommissure width': str(self.dis_of_vec(self.cord_from_name("right outer smile commissure"),
+            self.angles = {'canthus and smile commissure divation(dg)': str(self.angle_between_four_points(self.cord_from_name("right outer canthus"), self.cord_from_name("left outer canthus"), self.cord_from_name("right outer smile commissure"), self.cord_from_name("left outer smile commissure"))),
+                        'intercommissure width(mm)': str(self.dis_of_vec(self.cord_from_name("right outer smile commissure"),
                                                                         self.cord_from_name(
                                                                             "left outer smile commissure"),
                                                                         self.cord_from_name(
@@ -1187,7 +1169,7 @@ class CustomUI(QMainWindow):
                                                                         self.cord_from_name(
                                                                             "left inner canthus")
                                                                         )),
-                        'interlabial gap': str(self.dis_of_vec(self.cord_from_name("inferior upper lip border"),
+                        'interlabial gap(mm)': str(self.dis_of_vec(self.cord_from_name("inferior upper lip border"),
                                                                 self.cord_from_name(
                                                                     "superior lower lip border"),
                                                                 self.cord_from_name(
@@ -1195,7 +1177,7 @@ class CustomUI(QMainWindow):
                                                                 self.cord_from_name(
                                                                     "subnasale")
                                                                 )),
-                        'philtrum height': str(self.dis_of_vec(self.cord_from_name("subnasale"),
+                        'philtrum height(mm)': str(self.dis_of_vec(self.cord_from_name("subnasale"),
                                                                 self.cord_from_name(
                                                                     "inferior upper lip border"),
                                                                 self.cord_from_name(
@@ -1203,7 +1185,7 @@ class CustomUI(QMainWindow):
                                                                 self.cord_from_name(
                                                                     "subnasale")
                                                                 )),
-                        'transverse symmetry': str(self.rel_dis(np.abs(self.ver_dis_from_point_to_vec(self.cord_from_name("left outer smile commissure"),
+                        'transverse symmetry(mm)': str(self.rel_dis(np.abs(self.ver_dis_from_point_to_vec(self.cord_from_name("left outer smile commissure"),
                                                                                                         self.cord_from_name(
                                                                                                             "soft tissue nasion"),
                                                                                                         self.cord_from_name("soft tissue pogonion")) -
@@ -1214,16 +1196,16 @@ class CustomUI(QMainWindow):
                                                                 self.cord_from_name(
                                                                     "soft tissue nasion"),
                                                                 self.cord_from_name("subnasale"))),
-                        'vertical symmetry': str(self.angle_between_four_points(self.cord_from_name("left outer smile commissure"), self.cord_from_name("right outer smile commissure"), self.cord_from_name("soft tissue nasion"), self.cord_from_name("soft tissue pogonion")))
+                        'vertical symmetry(dg)': str(self.angle_between_four_points(self.cord_from_name("left outer smile commissure"), self.cord_from_name("right outer smile commissure"), self.cord_from_name("soft tissue nasion"), self.cord_from_name("soft tissue pogonion")))
                         }
             if self.display_tooth_landmarks == True:
-                self.angles['upper dental angulation'] = str(self.angle_between_four_points(self.cord_from_name("inferior upper lip border"),
+                self.angles['upper dental angulation(dg)'] = str(self.angle_between_four_points(self.cord_from_name("inferior upper lip border"),
                                                                                             self.cord_from_name(
                                                                                                 "incisor edge"),
                                                                                             self.cord_from_name(
                                                                                                 "soft tissue nasion"),
                                                                                             self.cord_from_name("subnasale")))
-                self.angles['gingival display'] = str(self.dis_of_vec(self.cord_from_name("inferior upper lip border"),
+                self.angles['gingival display(mm)'] = str(self.dis_of_vec(self.cord_from_name("inferior upper lip border"),
                                                                     self.cord_from_name(
                                                                         "cervical part of incisor"),
                                                                     self.cord_from_name(
@@ -1283,6 +1265,7 @@ class CustomUI(QMainWindow):
         '''dict for landmarks is a dict that stores the parameters to be passed to MyItem object.
         the structure of the dict is:{"center_x":int,"center_y":int,"name":str}
         '''
+        print(hex(id(QThread.currentThread())))
         self.ui.landmark_list[dict_for_landmarks['name']] = MyItem(
             dict_for_landmarks, self.ui.landmark_size)  # allocate like this to ensure in the middle. -25 and -25 are the upper and left most of the coordinates.
         # self.ui.landmark_list[0].setPos(QtCore.QPointF(100,100))
@@ -1291,15 +1274,9 @@ class CustomUI(QMainWindow):
                               ].inner_signal.mysignal.connect(self.refresh)
         self.ui.scene.addItem(
             self.ui.landmark_list[dict_for_landmarks['name']])
-        print(
-            self.ui.landmark_list[dict_for_landmarks['name']].transformOriginPoint().x())
+        print(f"The x of {dict_for_landmarks['name']} is {self.ui.landmark_list[dict_for_landmarks['name']].transformOriginPoint().x()}"
+            )
 
-        # self.ui.graphicsView.scene().setSceneRect(-200, -200, 400, 400) #very
-        # important for the whole accuracy!!!#allocate like this to ensure in
-        # the middle. -25 and -25 are the upper and left most of the
-        # coordinates.
-        '''print(self.ui.landmark_list[0].)
-        self.ui.graphicsView.setScene(self.ui.scene)'''
 
     def readcsv(self):
         # self.ui.pushButton_readcsv.setText("change_csv")
@@ -1323,7 +1300,6 @@ class CustomUI(QMainWindow):
         pass
 
     def writecsv(self):
-        # self.ui.pushButton_writecsv.setText("writing_csv")
         # allocate self as the parent window.
         write_dialog = write_Dialog(self)
         write_dialog.csv_source = "xxx"
@@ -1350,37 +1326,41 @@ class CustomUI(QMainWindow):
             self.identity = "tester2"
 
     def csv_exporter(self, csv_folder):
-        content = [i.get_dict()for i in list(self.ui.landmark_list.values())]
-        content_new = [{'center_x': str(x['center_x']), 'center_y': str(
-            x['center_y']), 'name': x['name']} for x in content]
 
-        if os.path.splitext(self.media_source)[-1] == '.jpg':
-            csv_file = csv_folder + '/' + \
-                os.path.basename(self.media_source) + '.csv'
-        if os.path.splitext(self.media_source)[-1] == '.mp4':
-            # the csv storing the landmarks.
-            csv_file = csv_folder + '/' + os.path.basename(self.media_source) + '-' + str(
-                float((self.current_frame - 1) / self.fps)) + '.csv'
-            # the csv storing the landmarks.
-            csv_file_2 = csv_folder + '/' + os.path.basename(self.media_source) + '-' + str(
-                float((self.current_frame - 1) / self.fps)) + '_measurements' + '.csv'
-
-            if self.save_img == True:
+        # Extract landmark data as a list of dictionaries from the UI landmark list
+        content = [i.get_dict() for i in list(self.ui.landmark_list.values())]
+        # Create a new list with relevant landmark information
+        content_new = [
+            {
+                'center_x': str(x['center_x']),
+                'center_y': str(x['center_y']),
+                'name': x['name']
+            } for x in content
+        ]
+        # Determine the appropriate CSV file path based on the media source type
+        media_extension = os.path.splitext(self.media_source)[-1]
+        if media_extension == '.jpg':
+            # If the media source is a JPG image, create a CSV file name based on the image's base name
+            csv_file = os.path.join(csv_folder, os.path.basename(self.media_source) + '.csv')
+        elif media_extension == '.mp4':
+            # If the media source is an MP4 video, create a CSV filename for storing landmarks
+            csv_file = os.path.join(csv_folder, os.path.basename(self.media_source) + '-' +
+                                    str(float((self.current_frame - 1) / self.fps)) + '.csv')
+            
+            # Create a second CSV filename for storing measurements
+            csv_file_2 = os.path.join(csv_folder, os.path.basename(self.media_source) + '-' +
+                                    str(float((self.current_frame - 1) / self.fps)) + '_measurements.csv')
+            # Check if images should be saved
+            if self.save_img:
                 try:
-                    cv2.imwrite(csv_folder +
-                                '/' +
-                                os.path.basename(self.media_source) +
-                                '-' +
-                                str(float((self.current_frame -
-                                           1) /
-                                          self.fps)) +
-                                '.png', self.image)
-                finally:
-                    pass
-                # except:pass
-
+                    # Save the current frame as a PNG image
+                    cv2.imwrite(os.path.join(csv_folder, os.path.basename(self.media_source) + '-' +
+                                            str(float((self.current_frame - 1) / self.fps)) + '.png'), self.image)
+                except Exception as e:
+                    # Optionally, you can log the exception if needed
+                    print(f"Error saving image: {e}")
+        # Create a dictionary to store file information
         new_dict = {}
-
         new_dict['filename'] = csv_file
 
         if self.test_mode == True:
@@ -1421,31 +1401,39 @@ class CustomUI(QMainWindow):
 
                     json.dump(file_data, file, indent=4)
 
+        # Define the field names for the CSV files
         fields = ['center_x', 'center_y', 'name']
         fields_2 = ['item', 'value']
         try:
-            file = open(csv_file, 'w')
-            file_2 = open(csv_file_2, 'w')
+            # Open the main CSV file for writing
+            with open(csv_file, 'w', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=fields)
+                writer.writeheader()  # Write the header for the main CSV
+                print(content)  # Debug: print the content of landmarks
+                print(content_new)  # Debug: print the new content for landmarks
+                # Assuming content is a list of dictionaries; write rows to the main CSV
+                writer.writerows(content)
         except PermissionError:
-            print("premission error")
+            print("Permission error: Unable to write to the file.")
             return
-        with file:
-            writer = csv.DictWriter(file, fieldnames=fields)
-            writer.writeheader()
-
-            print(content)
-
-            print(content_new)
-
-            writer.writerows(content)
-        with file_2:
-            writer_2 = csv.DictWriter(file_2, fieldnames=fields_2)
-            writer_2.writeheader()
-            content_angles = []
-            for key, value in self.angles.items():
-                content_angles.append({'item': key, 'value': value})
-
-            writer_2.writerows(content_angles)
+        except Exception as e:
+            print(f"An error occurred while writing to {csv_file}: {e}")
+            return
+        try:
+            # Open the second CSV file for writing
+            with open(csv_file_2, 'w', newline='') as file_2:
+                writer_2 = csv.DictWriter(file_2, fieldnames=fields_2)
+                writer_2.writeheader()  # Write the header for the secondary CSV
+                # Prepare angle data for writing
+                content_angles = [{'item': key, 'value': value} for key, value in self.angles.items()]
+                # Write rows to the secondary CSV
+                writer_2.writerows(content_angles)
+        except PermissionError:
+            print("Permission error: Unable to write to the file.")
+            return
+        except Exception as e:
+            print(f"An error occurred while writing to {csv_file_2}: {e}")
+            return
 
     def is_ip_exist(self, ip_address):
         try:
@@ -1455,15 +1443,16 @@ class CustomUI(QMainWindow):
             return False
 
     def time_changed(self):
-        print(self.total_frame)
-        print(self.fps)
-        print(self.ui.slider_time.value())
-        frame_target = int(
-            self.ui.slider_time.value() /
-            10000 *
-            self.total_frame)
+        print("total frame count:"+str(self.total_frame))
+        print("video fps:"+str(self.fps))
+        print("current slider location:"+str(self.ui.slider_time.location))
+        frame_target = self.ui.slider_time.location
 
-        self.current_frame = frame_target
+        if frame_target<=0:
+            pass
+
+        else:
+            self.current_frame = frame_target
 
         if self.vid.isOpened():
             self.vid.set(cv2.CAP_PROP_POS_FRAMES, frame_target)
@@ -1472,11 +1461,11 @@ class CustomUI(QMainWindow):
 
         self.ui.time_setter.setText(str(float(self.current_frame / self.fps)))
 
-        QtWidgets.QToolTip.showText(
+        '''QtWidgets.QToolTip.showText(
             QtCore.QPoint(
                 100, 100), str(
                 float(
-                    frame_target / self.fps)), self.ui.slider_time)
+                    frame_target / self.fps)), self.ui.slider_time)'''
         print('time')
 
         img, self.image = self.vid.read()
@@ -1525,7 +1514,7 @@ class CustomUI(QMainWindow):
                 display += key + ': ' + value + '\n'
         self.ui.textEdit_2.setPlainText(display)
 
-        print(text)
+        print("Now items in combobox are: "+text)
         print(self.ui.landmark_list['right outer smile commissure'].brush().color().name())
         print(self.measure_to_mark(text)[0])
         if self.ui.landmark_list[self.measure_to_mark(text)[0]].brush().color().name()=='#ffff00':
@@ -1541,21 +1530,21 @@ class CustomUI(QMainWindow):
                 self.ui.comboBox.addItem(key)
 
     def measure_to_mark(self,measurement):
-        if measurement=='intercommissure width':
+        if measurement=='intercommissure width(mm)':
             return ['right outer smile commissure','left outer smile commissure']
-        elif measurement=='canthus and smile commissure divation': 
+        elif measurement=='canthus and smile commissure divation(dg)': 
             return ["right outer canthus","left outer canthus","right outer smile commissure","left outer smile commissure"]
-        elif measurement=='interlabial gap': 
+        elif measurement=='interlabial gap(mm)': 
             return["inferior upper lip border","superior lower lip border"]
-        elif measurement== 'philtrum height': 
+        elif measurement== 'philtrum height(mm)': 
             return["subnasale","inferior upper lip border"]
-        elif measurement=='transverse symmetry': 
+        elif measurement=='transverse symmetry(mm)': 
             return["left outer smile commissure","right outer smile commissure","soft tissue nasion","subnasale"]
-        elif measurement=='vertical symmetry': 
+        elif measurement=='vertical symmetry(dg)': 
             return["left outer smile commissure","right outer smile commissure","soft tissue nasion", "soft tissue pogonion"]
-        elif measurement=='upper dental angulation':
+        elif measurement=='upper dental angulation(dg)':
             return["inferior upper lip border","incisor edge"]
-        elif measurement=='gingival display':
+        elif measurement=='gingival display(mm)':
             return["inferior upper lip border","cervical part of incisor"]
 
     def load_the_tooth(self, text):
@@ -1640,7 +1629,7 @@ class CustomUI(QMainWindow):
 if __name__ == '__main__':
     logging.basicConfig(
     filename='error_log.txt',
-    level=logging.ERROR,
+    level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
@@ -1670,7 +1659,8 @@ if __name__ == '__main__':
         cutomUI = CustomUI()
         cutomUI.show()
         sys.exit(app.exec_())
-    except:
+    except Exception as e:
+        print(e)
         stop_ec2_instance(instance_id, credentials_file)
 '''
 12.10 task: write_csv dialog choose different image.

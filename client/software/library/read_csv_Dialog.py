@@ -9,7 +9,7 @@ import imutils
 import csv
 
 
-class CustomUI(QDialog):
+class read_Dialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)  # 调用父类构造函数，self 就是一个 QMainWindow 对象
         self.ui = Ui_Dialog()  # 创建UI 对象
@@ -34,6 +34,6 @@ class CustomUI(QDialog):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)  # 创建app，用 QApplication 类
-    cutomUI = CustomUI()
+    cutomUI = read_Dialog()
     cutomUI.show()
     sys.exit(app.exec_())
