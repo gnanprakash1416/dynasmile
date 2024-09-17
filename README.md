@@ -67,15 +67,40 @@ For convenience, the certification information is provided in the tables below:
 > [!IMPORTANT]
 > This program relies on AWS EC2 GPU web instance to run, if you are new to EC2, please refer to this website https://aws.amazon.com/ec2/getting-started/
 
+### Using our pre-configured EC2 instance
+> [!IMPORTANT]
+> Since our computing resource is limited, the instance might be temporarily stopped anytime.
+
+```shell
+# Ensure Git is installed
+# Visit https://git-scm.com to download and install console Git if not already installed
+# Clone the repository to local computer
+git clone https://github.com/dentistfrankchen/dynasmile.git
+
+# Navigate to the project directory(.../Dynasmile)
+cd The/path/to/your/project/directory
+
+# Make sure the python version of your computer is python==3.8.x
+# Create python environment
+python -m venv ./venv
+
+# Install the requirements for the local interface.
+./venv/Scripts/pip.exe install -r ./client/requirements.txt
+
+
+
+```
+
+
+
 The instructions below assumes that you already had one GPU EC2 instance(**AT LEAST G4DN.XLARGE**and **AT LEAST 100GB for storage**) to run on cloud:
 
 ### Configuring EC2 instance
-```shell
+
 # Connect to the EC2 instance via web connection through "EC2 instance connect"(You can see the picture above if you are correct) .
 # 
 
-# Ensure Git is installed
-# Visit https://git-scm.com to download and install console Git if not already installed
+
 
 # Create a Amazon account, and create an Amazon EC2 instance with g4dn.xlarge
 # For people who do this, you might have difficulties. Please feel free to contact dentistfrankchen@outlook.com
