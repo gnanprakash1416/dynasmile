@@ -78,14 +78,10 @@ For convenience, the certification information is provided in the tables below:
 git clone https://github.com/dentistfrankchen/dynasmile.git
 
 # Navigate to the project directory(.../Dynasmile)
-cd The/path/to/your/project/directory
-
-# Make sure the python version of your computer is python==3.8.x
-# Create python environment
-python -m venv ./venv
+cd Path/to/dynasmile-master
 
 # Install the requirements for the local interface.
-./venv/Scripts/pip.exe install -r ./client/requirements.txt
+.\venv\Scripts\pip.exe install -r .\client\requirements.txt
 
 ```
 
