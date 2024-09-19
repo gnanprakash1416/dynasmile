@@ -98,10 +98,10 @@ python -m venv ./venv
 # Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
 
 # Navigate to the project directory
-cd The/path/to/your/project/directory
+cd Path/to/dynasmile-master
 
 # You can start the main interface.
-./venv/Scripts/python.exe ./client/software/main.py
+.\venv\Scripts\python.exe .\client\software\main.py
 
 ```
 
