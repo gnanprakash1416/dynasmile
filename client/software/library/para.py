@@ -4,8 +4,6 @@ from forward import forward_tunnel
 
 import time
 
-import paramiko
-
 import signal
 
 import sys
