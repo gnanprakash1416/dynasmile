@@ -80,8 +80,11 @@ git clone https://github.com/dentistfrankchen/dynasmile.git
 # Navigate to the project directory(.../Dynasmile)
 cd Path/to/dynasmile-master
 
+#activate the virtual environment
+.\venv\Scripts\activate
+
 # Install the requirements for the local interface.
-.\venv\Scripts\pip.exe install -r .\client\requirements.txt
+pip install -r requirements.txt
 
 ```
 
@@ -93,11 +96,10 @@ cd Path/to/dynasmile-master
 ```shell
 # Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
 
-# Navigate to the project directory
-cd Path/to/dynasmile-master
+# Assuming you have activated the virtual environment.
 
-# You can start the main interface.
-.\venv\Scripts\python.exe .\client\software\main.py
+# You can start the main interface now.
+python .\client\software\main.py
 
 ```
 
