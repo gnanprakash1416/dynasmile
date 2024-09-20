@@ -1649,7 +1649,7 @@ if __name__ == '__main__':
         public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
         server=public_dns
         python_path=os.path.join(upper_folder,'venv','Scripts','python.exe')
-        process=subprocess.Popen(['start','cmd','/k',python_path,
+        process=subprocess.Popen(['start','cmd','/k','python ',
         os.path.join(current_folder,'library','para.py'),'--server',server],shell=True)
 
         print("loading dependencies...")
