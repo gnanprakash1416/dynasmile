@@ -226,6 +226,8 @@ class CustomUI(QMainWindow):
     def __init__(self, parent=None):
         self.load_config(os.path.join(current_folder,'library','config.json'))
 
+
+
         # iheriting from QMainWndow
         super().__init__(parent)
 
@@ -498,7 +500,7 @@ class CustomUI(QMainWindow):
             print('detected greater than one rate with mobile: ' +
                   str(self.face_greater_than_one_mobile /
                       len(self.emotion_mark_list)))
-            append_tojson('test.json', export_data)  # not too early.
+            append_tojson(os.path.join(current_folder,'test.json'), export_data)  # not too early.
 
         @sio.event
         def disconnect():  # You don't have to manully use the disconnection, since it will disconnect automatically when the program returns.
@@ -651,7 +653,7 @@ class CustomUI(QMainWindow):
                     thread.wait()   # Use wait() to wait for the thread to finish
                 else:
                     # Handle previously analyzed video
-                    self.vid = cv2.VideoCapture("myvideo.mp4")  # Load the default video
+                    self.vid = cv2.VideoCapture(os.path.join(current_folder,'output','myvideo.mp4'))  # Load the default video
                 # Optionally reduce the capture frame rate
                 if reduce_fps:
                     original_fps = self.vid.get(cv2.CAP_PROP_FPS)
@@ -709,10 +711,10 @@ class CustomUI(QMainWindow):
             self.ui.slider_time.setEnabled(False)
             
             # Check if the current media source is in the JSON file for recognition
-            if self.recognize_json and is_item_in_json('test.json', self.media_source):
+            if self.recognize_json and is_item_in_json(os.path.join(current_folder,'test.json'), self.media_source):
                 print('Your mp4 is being analyzed; please decide if you need it to be analyzed.')
                 # Read data from JSON and update the media source and related parameters
-                temp_data = read_from_json('test.json', self.media_source)
+                temp_data = read_from_json(os.path.join(current_folder,'test.json'), self.media_source)
                 self.media_source = temp_data['filename']
                 self.fps = temp_data['fps']
                 self.emotion_mark_list = temp_data['emotion_mark_list']
@@ -726,7 +728,7 @@ class CustomUI(QMainWindow):
                 # Mark the video as analyzed
                 self.analyzed = True
                 # Restart video capture from a default video source
-                self.vid = cv2.VideoCapture("myvideo.mp4")
+                self.vid = cv2.VideoCapture(os.path.join(current_folder,'output','myvideo.mp4'))
                 self.vid.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Set to the first frame
                 # Update video properties after restarting the capture
                 self.total_frame = int(self.vid.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -769,7 +771,7 @@ class CustomUI(QMainWindow):
             pass
 
         self.vid_writer = cv2.VideoWriter(
-            "myvideo.mp4", cv2.VideoWriter.fourcc(
+            os.path.join(current_folder,'output','myvideo.mp4'), cv2.VideoWriter.fourcc(
                 'm', 'p', '4', 'v'), self.fps, (int(
                     self.vid.get(
                         cv2.CAP_PROP_FRAME_WIDTH)), int(
@@ -830,7 +832,7 @@ class CustomUI(QMainWindow):
         # another video that labels all not happy frames with a green frame.
         if self.store_not_happy_frame_but_show == True:
             self.vid_writer_another = cv2.VideoWriter(
-                "myvideo_another.mp4", cv2.VideoWriter.fourcc(
+                os.path.join(current_folder,'output','myvideo_another.mp4'), cv2.VideoWriter.fourcc(
                     'm', 'p', '4', 'v'), self.fps, (int(
                         self.vid.get(
                             cv2.CAP_PROP_FRAME_WIDTH)), int(
@@ -952,7 +954,7 @@ class CustomUI(QMainWindow):
 
         self.max=round(x[i], 2)*self.fps
 
-        plt.savefig("commissure.png")
+        plt.savefig(os.path.join(current_folder,'output','commissure.png'))
 
         plt.cla()
         
@@ -963,7 +965,7 @@ class CustomUI(QMainWindow):
 
         self.analyzed = True
 
-        self.vid = cv2.VideoCapture("myvideo.mp4")
+        self.vid = cv2.VideoCapture(os.path.join(current_folder,'output','myvideo.mp4'))
         self.vid.set(cv2.CAP_PROP_POS_FRAMES, 0)  # set to the first frame.
         self.total_frame = int(self.vid.get(cv2.CAP_PROP_FRAME_COUNT))
         self.fps = int(self.vid.get(cv2.CAP_PROP_FPS))
@@ -1630,18 +1632,18 @@ class CustomUI(QMainWindow):
 
 
 if __name__ == '__main__':
+    current_path=os.path.abspath(__file__)
+    current_folder=os.path.dirname(current_path)
+    parent_folder=os.path.dirname(current_folder)
+    upper_folder=os.path.dirname(parent_folder)
+
     logging.basicConfig(
-    filename='error_log.txt',
+    filename=os.path.join(current_folder,'output','error_log.txt'),
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
     sys.excepthook = log_exception
-
-    current_path=os.path.abspath(__file__)
-    current_folder=os.path.dirname(current_path)
-    parent_folder=os.path.dirname(current_folder)
-    upper_folder=os.path.dirname(parent_folder)
 
     instance_id = 'i-034544d95b9703bfc'  # substance ID
     credentials_file = os.path.join(current_folder,'library','ec2_config.json')
