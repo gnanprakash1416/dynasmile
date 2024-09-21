@@ -514,7 +514,10 @@ class CustomUI(QMainWindow):
                     DThread = disconnection__Thread()
                     DThread.start()
                     DThread.wait()
-                    sio.emit('How s it going', {'filename': self.media_source})
+                    if self.requires_analyze==True:
+                        sio.emit('How s it going', {'filename': self.media_source})
+                    else:
+                        pass
                     # print('detecting...waiting for connection')
                     self.disconnected = False
 
