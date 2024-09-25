@@ -80,7 +80,7 @@ git clone https://github.com/dentistfrankchen/dynasmile.git
 # Navigate to the project directory(.../dynasmile-master)
 cd Path/to/dynasmile-master
 
-#activate the virtual environment
+# Activate the virtual environment
 .\venv\Scripts\activate
 
 # Install the requirements for the local interface.
