@@ -106,7 +106,7 @@ python .\client\software\main.py
 ### Step 2: Use the interface to conduct smile analysis.
 1. Upload a video by clicking **Drag/Drop panel**.
 2. The program then uploads the video, displaying the process through the **progress bar**.
-3. When the progress bar reaches 100 percent, frame with greatest smile intensity will be automatically played.
+3. When the progress bar reaches 100 percent, frame with greatest smile intensity will be automatically displayed.
 4. The landmarks and measurements will be automatically displayed.
 5. The user clicks the **'Save csv'** button, and the coordinates of the landmarks as well as the measurements will be saved in CSV files.
 
