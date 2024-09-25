@@ -47,7 +47,7 @@ For convenience, the certification information is provided in the tables below:
 |11|Left upper cuspid tip|
 |12|Right upper cuspid tip|
 |13|Cervical part of incisor| 
-|**total 13 landmarks**|
+|**In total 13 landmarks**|
 
 ### Smile measurements
 |Number|Measurement name|
@@ -60,7 +60,7 @@ For convenience, the certification information is provided in the tables below:
 |6|Vertical symmetry|
 |7|Dental angulation|
 |8|Canthus and smile commissure deviation|
-|**total 9 measurements**|
+|**In total 8 measurements**|
 
 
 ## 📝 How to Install
