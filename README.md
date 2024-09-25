@@ -21,9 +21,9 @@
 
 - **Smile intensity estimation**: Dynasmile automatically analyzes the smile intensity across different frames of the video. It plots the smile intensity, which helps the dentist to locate the frame where the smile reaches its peak.
 
-- **Landmark detecion and display**: Dynasmile detects dentofacial landmarks on patients fraces and overlays the result to the selected frame, providing a user-friendly interface for dental specialists.
+- **Landmark detecion and display**: Dynasmile detects dentofacial landmarks on patients' faces and overlays the result to the selected frame, providing a user-friendly interface for dental specialists.
 
-- **Low cost**:Dynasmile do not rely on local graphical card. The special architecture of this software relies on EC2 server, which can be rent at low cost and used at any time.
+- **Low cost**: Dynasmile do not rely on local graphical card. The special architecture of this software relies on EC2 server, which can be rent at low cost and used at any time.
 
 ## 🎓 Functionality
 
@@ -77,7 +77,7 @@ For convenience, all the information is provided in the tables below:
 # Clone the repository to local computer
 git clone https://github.com/dentistfrankchen/dynasmile.git
 
-# Navigate to the project directory(.../Dynasmile)
+# Navigate to the project directory(.../dynasmile-master)
 cd Path/to/dynasmile-master
 
 #activate the virtual environment
