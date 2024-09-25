@@ -94,7 +94,7 @@ pip install -r requirements.txt
 
 ### Step 1: Start main.py and connect to the EC2 instance.
 ```shell
-# Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
+# Open Command Prompt.
 
 # Assuming you have activated the virtual environment.
 
