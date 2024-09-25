@@ -25,11 +25,11 @@
 
 - **Low cost**:Dynasmile do not rely on local graphical card. The special architecture of this software relies on EC2 server, which can be rent at low cost and used at any time.
 
-## 🎓 Dependency
+## 🎓 Functionality
 
-Dynasmile processes the video uploaded by the user. It conducts detailed smile analysis on the selected frame, which includes the detecion of 13 dentofacial landmarks and perform 9 measurements.
+Dynasmile processes the video uploaded by the user. It performs smile analysis on the selected frame, which includes detection of 13 dentofacial landmarks and performing 8 smile measurements.
 
-For convenience, the certification information is provided in the tables below:
+For convenience, all the information is provided in the tables below:
 
 ### Dentofacial landmarks
 |Number|Landmark name|
@@ -67,7 +67,7 @@ For convenience, the certification information is provided in the tables below:
 > [!IMPORTANT]
 > This program relies on AWS EC2 GPU web instance to run, if you are new to EC2, please refer to this website https://aws.amazon.com/ec2/getting-started/
 
-### Using our pre-configured EC2 instance
+### Dependency: Using our pre-configured EC2 instance
 > [!IMPORTANT]
 > Since our computing resource is limited, the instance might be temporarily stopped anytime.
 
@@ -90,9 +90,9 @@ pip install -r requirements.txt
 
 
 
-## 📚 Documentation 
+## 📚 How to run the program 
 
-### Starting the program
+### Step 1: Start main.py and connect to the EC2 instance.
 ```shell
 # Open a terminal (Command Prompt or PowerShell for Windows, Terminal for macOS or Linux)
 
@@ -103,7 +103,7 @@ python .\client\software\main.py
 
 ```
 
-### Running the program to conduct smile analysis
+### Step 2: Use the interface to conduct smile analysis.
 1. Upload a video by clicking **Drag/Drop panel**.
 2. The program then uploads the video, displaying the process through the **progress bar**.
 3. When the progress bar reaches 100 percent, frame with greatest smile intensity will be automatically played.
