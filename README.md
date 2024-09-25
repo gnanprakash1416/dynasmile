@@ -7,7 +7,7 @@
 [![Share](https://img.shields.io/badge/share-0088CC?logo=telegram&logoColor=white)](https://t.me/share/url?url=https://github.com/Abblix/Oidc.Server&text=Check%20out%20this%20project%20on%20GitHub)
 
 ## Table of Contents
-- [About](#-about)
+- [Features highlight](#-features-highlight)
 - [Functionality](#-functionality)
 - [How to Install](#-how-to-install)
 - [How to run the program](#-how-to-run-the-program)
@@ -15,7 +15,7 @@
 - [License](#-license)
 - [Contacts](#%EF%B8%8F-contacts)
 
-## 🚀 About
+## 🚀 Features highlight
 
 **Dynasmile** is a Python-based AI-driven dynamic smile analysis tool for dental research. It uses computer vision techniques to analyze smile process. As a dental application, it features:
 
