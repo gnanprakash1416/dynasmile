@@ -10,7 +10,7 @@
 - [About](#-about)
 - [Functionality](#-functionality)
 - [How to Install](#-how-to-install)
-- [Documentation](#-documentation)
+- [How to run the program](#-how-to-run-the-program)
 - [Feedback and Contributions](#-feedback-and-contributions)
 - [License](#-license)
 - [Contacts](#%EF%B8%8F-contacts)
