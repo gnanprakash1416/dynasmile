@@ -31,6 +31,7 @@ import argparse
 import time
 import logging
 import traceback
+import atexit
 
 def log_exception(exc_type, exc_value, exc_traceback):
     if issubclass(exc_type, KeyboardInterrupt):
@@ -1636,6 +1637,8 @@ if __name__ == '__main__':
     current_folder=os.path.dirname(current_path)
     parent_folder=os.path.dirname(current_folder)
     upper_folder=os.path.dirname(parent_folder)
+
+    atexit.register(stop_ec2_instance, instance_id, credentials_file)
 
     logging.basicConfig(
     filename=os.path.join(current_folder,'output','error_log.txt'),
