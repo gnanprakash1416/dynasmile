@@ -115,7 +115,7 @@ python .\client\software\main.py
 We've made a lot of effort to implement many aspects of dynamic smile analysis in this software. However, the development journey doesn't end now, and your feedback is crucial for our further improvement.
 
 > [!IMPORTANT]
-> Whether you have feedback on improvements, have encountered any bugs, or have suggestions for features, we're cannot wait to hear from you. Your insights help us get our software more robust and user-friendly.
+> Whether you have feedback on improvements, have encountered any bugs, or have suggestions for features, we cannot wait to hear from you. Your insights help us get our software more robust and user-friendly.
 
 Please feel free to contribute by [submitting an issue](https://github.com/dentistfrankchen/dynasmile/issues). Each contribution helps us get better and improve.
 
