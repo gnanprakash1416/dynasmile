@@ -1638,8 +1638,6 @@ if __name__ == '__main__':
     parent_folder=os.path.dirname(current_folder)
     upper_folder=os.path.dirname(parent_folder)
 
-    atexit.register(stop_ec2_instance, instance_id, credentials_file)
-
     logging.basicConfig(
     filename=os.path.join(current_folder,'output','error_log.txt'),
     level=logging.DEBUG,
@@ -1650,6 +1648,8 @@ if __name__ == '__main__':
 
     instance_id = 'i-034544d95b9703bfc'  # substance ID
     credentials_file = os.path.join(current_folder,'library','ec2_config.json')
+
+    atexit.register(stop_ec2_instance, instance_id, credentials_file)
 
     print("please wait for the EC2 server to start...")
 
