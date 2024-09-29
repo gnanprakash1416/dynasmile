@@ -92,7 +92,6 @@ pip install -r requirements.txt
 
 ## 📚 How to run the program 
 
-
 ### Step 1: Start main.py and connect to the EC2 instance.
 ```shell
 # Open Command Prompt.
@@ -119,6 +118,10 @@ When the connection is finished, the mian interface would pop up.
 3. When the progress bar reaches 100 percent, frame with greatest smile intensity will be automatically displayed.
 4. The landmarks and measurements will be automatically displayed.
 5. The user clicks the **'Save csv'** button, and the coordinates of the landmarks as well as the measurements will be saved in CSV files.
+
+For a real-time view, here's a video for how to run this program:
+
+https://github.com/user-attachments/assets/79f666d3-ec7a-4db0-8ec4-c57b7f8d55bb
 
 ## 🤝 Feedback and Contributions
 
