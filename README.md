@@ -107,6 +107,7 @@ python .\client\software\main.py
 During this process, the mian.py will open command prompt windows to automatically connect to 
 the EC2 instance.
 
+**Then you need to wait for the connection.**
 **Please do not close the windows of command prompt.**
 
 When the connection is finished, the mian interface would pop up.
