@@ -92,6 +92,7 @@ pip install -r requirements.txt
 
 ## 📚 How to run the program 
 
+
 ### Step 1: Start main.py and connect to the EC2 instance.
 ```shell
 # Open Command Prompt.
