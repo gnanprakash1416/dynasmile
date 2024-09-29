@@ -6093,3 +6093,790 @@ b'<?xml version="1.0" encoding="UTF-8"?>\n\n<CompleteMultipartUploadResult xmlns
 2024-09-21 21:30:32,737 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\BOD_PSTC.TTF', name='Bodoni MT', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
 2024-09-21 21:30:32,737 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\GILLUBCD.TTF', name='Gill Sans Ultra Bold Condensed', style='normal', variant='normal', weight=400, stretch='condensed', size='scalable')) = 10.25
 2024-09-21 21:30:32,737 - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('c:\\Users\\dentistfrankchen\\Desktop\\SoftwareX\\Dynasmile\\venv\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+2024-09-21 21:33:26,193 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x0000026262EF90D0>
+2024-09-21 21:33:26,206 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x0000026268490310>
+2024-09-21 21:33:26,206 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-21 21:33:26,207 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-21 21:33:26,207 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-21 21:33:26,207 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-21 21:33:26,207 - DEBUG - No configured endpoint found.
+2024-09-21 21:33:26,210 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-21 21:33:26,213 - DEBUG - Registering retry handlers for service: ec2
+2024-09-21 21:33:26,215 - DEBUG - Loading ec2:ec2
+2024-09-21 21:33:26,219 - DEBUG - Event creating-resource-class.ec2.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x0000026270E23160>
+2024-09-21 21:33:26,220 - DEBUG - Loading ec2:Instance
+2024-09-21 21:33:26,221 - DEBUG - Renaming Instance attribute network_interfaces
+2024-09-21 21:33:26,226 - DEBUG - Event creating-resource-class.ec2.Instance: calling handler <function lazy_call.<locals>._handler at 0x0000026270E231F0>
+2024-09-21 21:33:26,226 - DEBUG - Calling ec2:stop_instances with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-21 21:33:26,227 - DEBUG - Event before-parameter-build.ec2.StopInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x0000026262F02AF0>>
+2024-09-21 21:33:26,227 - DEBUG - Event before-parameter-build.ec2.StopInstances: calling handler <function generate_idempotent_uuid at 0x0000026262F065E0>
+2024-09-21 21:33:26,227 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-21 21:33:26,228 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-21 21:33:26,229 - DEBUG - Event before-call.ec2.StopInstances: calling handler <function add_recursion_detection_header at 0x0000026262F06280>
+2024-09-21 21:33:26,229 - DEBUG - Event before-call.ec2.StopInstances: calling handler <function inject_api_version_header_if_needed at 0x0000026262F09E50>
+2024-09-21 21:33:26,229 - DEBUG - Making request for OperationModel(name=StopInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'StopInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002627B2146A0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-21 21:33:26,230 - DEBUG - Event request-created.ec2.StopInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002627B214610>>
+2024-09-21 21:33:26,230 - DEBUG - Event choose-signer.ec2.StopInstances: calling handler <function set_operation_specific_signer at 0x0000026262F064C0>
+2024-09-21 21:33:26,231 - DEBUG - Calculating signature using v4 auth.
+2024-09-21 21:33:26,231 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240921T133326Z
+
+content-type;host;x-amz-date
+18b884662c3a44ed8d1372cf909d454137cf70c3dc19ab4bef993e6eba235a45
+2024-09-21 21:33:26,231 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240921T133326Z
+20240921/us-east-1/ec2/aws4_request
+7a0d361829b39850a06eab56e37138942b1c33478531ed872f7098cf20f30417
+2024-09-21 21:33:26,231 - DEBUG - Signature:
+eefd2a153a20da58985e36efddfc3a104559ed60ed91f8719f337f0270fc6af5
+2024-09-21 21:33:26,231 - DEBUG - Event request-created.ec2.StopInstances: calling handler <function add_retry_headers at 0x0000026262F0A550>
+2024-09-21 21:33:26,232 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240921T133326Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240921/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=eefd2a153a20da58985e36efddfc3a104559ed60ed91f8719f337f0270fc6af5', 'amz-sdk-invocation-id': b'b94aee50-a06d-4b7a-8482-d8a7217fd4ba', 'amz-sdk-request': b'attempt=1', 'Content-Length': '72'}>
+2024-09-21 21:33:26,233 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-21 21:33:26,233 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-21 21:33:28,796 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 411
+2024-09-21 21:33:28,797 - DEBUG - Response headers: {'x-amzn-RequestId': '34c135ea-0dcf-4524-927d-8048d4ba9abf', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '411', 'Date': 'Sat, 21 Sep 2024 13:33:28 GMT', 'Server': 'AmazonEC2'}
+2024-09-21 21:33:28,797 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<StopInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>34c135ea-0dcf-4524-927d-8048d4ba9abf</requestId><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><currentState><code>64</code><name>stopping</name></currentState><previousState><code>16</code><name>running</name></previousState></item></instancesSet></StopInstancesResponse>'
+2024-09-21 21:33:28,798 - DEBUG - Event needs-retry.ec2.StopInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002627B1A9A60>
+2024-09-21 21:33:28,798 - DEBUG - No retry needed.
+2024-09-21 21:33:28,799 - DEBUG - Response: {'StoppingInstances': [{'CurrentState': {'Code': 64, 'Name': 'stopping'}, 'InstanceId': 'i-034544d95b9703bfc', 'PreviousState': {'Code': 16, 'Name': 'running'}}], 'ResponseMetadata': {'RequestId': '34c135ea-0dcf-4524-927d-8048d4ba9abf', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '34c135ea-0dcf-4524-927d-8048d4ba9abf', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Sat, 21 Sep 2024 13:33:28 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}
+2024-09-29 22:22:55,843 - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1660, in <module>
+    public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 36, in start_ec2_instance
+    instance_status = get_instance_status(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 20, in get_instance_status
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+NameError: name 'key' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1675, in <module>
+    stop_ec2_instance(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 92, in stop_ec2_instance
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+NameError: name 'key' is not defined
+2024-09-29 22:24:25,223 - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1661, in <module>
+    public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 37, in start_ec2_instance
+    instance_status = get_instance_status(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 21, in get_instance_status
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 9, in decrypt_new
+    permuted_text = simple_permutation(encrypted_text, reverse_permutation)
+NameError: name 'simple_permutation' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1676, in <module>
+    stop_ec2_instance(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 96, in stop_ec2_instance
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 9, in decrypt_new
+    permuted_text = simple_permutation(encrypted_text, reverse_permutation)
+NameError: name 'simple_permutation' is not defined
+2024-09-29 22:25:31,128 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-09-29 22:25:31,130 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-09-29 22:25:31,131 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-09-29 22:25:31,133 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-09-29 22:25:31,133 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-09-29 22:25:31,134 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-09-29 22:25:31,135 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-09-29 22:25:31,138 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-09-29 22:25:31,138 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-09-29 22:25:31,138 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-09-29 22:25:31,138 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-09-29 22:25:31,163 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\endpoints.json
+2024-09-29 22:25:31,201 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\sdk-default-configuration.json
+2024-09-29 22:25:31,202 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x000002C28E0A80D0>
+2024-09-29 22:25:31,483 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\service-2.json.gz
+2024-09-29 22:25:31,759 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\endpoint-rule-set-1.json.gz
+2024-09-29 22:25:31,778 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\partitions.json
+2024-09-29 22:25:31,790 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x000002C293640310>
+2024-09-29 22:25:31,790 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:25:31,790 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:25:31,790 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:25:31,790 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:25:31,790 - DEBUG - No configured endpoint found.
+2024-09-29 22:25:31,792 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:25:31,843 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\_retry.json
+2024-09-29 22:25:31,845 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:25:31,846 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000002C28E0B3AC0>>
+2024-09-29 22:25:31,846 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000002C28E0B65E0>
+2024-09-29 22:25:31,847 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:25:31,847 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:25:31,847 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000002C28E0B6280>
+2024-09-29 22:25:31,847 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000002C28E0B9E50>
+2024-09-29 22:25:31,847 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002C29DBEC100>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:25:31,848 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002C29DBEC0D0>>
+2024-09-29 22:25:31,848 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000002C28E0B64C0>
+2024-09-29 22:25:31,849 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:25:31,849 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142531Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:25:31,849 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142531Z
+20240929/us-east-1/ec2/aws4_request
+3aeb74762ee0f94f1843cd427b0bab94202833828caacd2426ede1839bf7d551
+2024-09-29 22:25:31,849 - DEBUG - Signature:
+0bd233ddfeacfafe5243366b64f283f9d3898d731eb3526448cafa4500f196fd
+2024-09-29 22:25:31,849 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000002C28E0BC550>
+2024-09-29 22:25:31,849 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64', 'X-Amz-Date': b'20240929T142531Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=0bd233ddfeacfafe5243366b64f283f9d3898d731eb3526448cafa4500f196fd', 'amz-sdk-invocation-id': b'408b1a19-4869-4dc0-a358-bc9a0eef47e7', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:25:31,850 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:25:31,851 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:25:35,111 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4369
+2024-09-29 22:25:35,112 - DEBUG - Response headers: {'x-amzn-RequestId': '2bc5f6c1-3359-4692-a8a7-bcb4dc9de5ae', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4369', 'Date': 'Sun, 29 Sep 2024 14:25:35 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:25:35,112 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>2bc5f6c1-3359-4692-a8a7-bcb4dc9de5ae</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>80</code><name>stopped</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName/><reason>User initiated (2024-09-29 03:53:16 GMT)</reason><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T03:51:59.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><stateReason><code>Client.UserInitiatedShutdown</code><message>Client.UserInitiatedShutdown: User initiated shutdown</message></stateReason><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:25:35,122 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002C29DC245B0>
+2024-09-29 22:25:35,122 - DEBUG - No retry needed.
+2024-09-29 22:25:35,182 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\boto3\data\ec2\2016-11-15\resources-1.json
+2024-09-29 22:25:35,184 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x000002C28E0A80D0>
+2024-09-29 22:25:35,189 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x000002C293640310>
+2024-09-29 22:25:35,189 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:25:35,189 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:25:35,189 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:25:35,189 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:25:35,189 - DEBUG - No configured endpoint found.
+2024-09-29 22:25:35,190 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:25:35,191 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:25:35,192 - DEBUG - Loading ec2:ec2
+2024-09-29 22:25:35,193 - DEBUG - Event creating-resource-class.ec2.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x000002C29BFA3AF0>
+2024-09-29 22:25:35,199 - DEBUG - Loading ec2:Instance
+2024-09-29 22:25:35,199 - DEBUG - Renaming Instance attribute network_interfaces
+2024-09-29 22:25:35,201 - DEBUG - Event creating-resource-class.ec2.Instance: calling handler <function lazy_call.<locals>._handler at 0x000002C29BFA3B80>
+2024-09-29 22:25:35,202 - DEBUG - Calling ec2:start_instances with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-29 22:25:35,202 - DEBUG - Event before-parameter-build.ec2.StartInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000002C28E0B3AC0>>
+2024-09-29 22:25:35,202 - DEBUG - Event before-parameter-build.ec2.StartInstances: calling handler <function generate_idempotent_uuid at 0x000002C28E0B65E0>
+2024-09-29 22:25:35,202 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:25:35,202 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:25:35,203 - DEBUG - Event before-call.ec2.StartInstances: calling handler <function add_recursion_detection_header at 0x000002C28E0B6280>
+2024-09-29 22:25:35,203 - DEBUG - Event before-call.ec2.StartInstances: calling handler <function inject_api_version_header_if_needed at 0x000002C28E0B9E50>
+2024-09-29 22:25:35,203 - DEBUG - Making request for OperationModel(name=StartInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'StartInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002C29DE2EBB0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:25:35,203 - DEBUG - Event request-created.ec2.StartInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002C29DE2EB20>>
+2024-09-29 22:25:35,203 - DEBUG - Event choose-signer.ec2.StartInstances: calling handler <function set_operation_specific_signer at 0x000002C28E0B64C0>
+2024-09-29 22:25:35,203 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:25:35,203 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142535Z
+
+content-type;host;x-amz-date
+8b1700b0d39f37c331ea5030fdac0381658295d707bc6752dcbeb6ae514054cc
+2024-09-29 22:25:35,204 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142535Z
+20240929/us-east-1/ec2/aws4_request
+4160ef69d6cfcd639ed3aa49cd7529368fc0f02213e8e1e98323f8774ba315ce
+2024-09-29 22:25:35,204 - DEBUG - Signature:
+e38c6876e95c51b809714947e404b687c4cdad326b52fbde3fd897ff30012dc2
+2024-09-29 22:25:35,204 - DEBUG - Event request-created.ec2.StartInstances: calling handler <function add_retry_headers at 0x000002C28E0BC550>
+2024-09-29 22:25:35,204 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142535Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=e38c6876e95c51b809714947e404b687c4cdad326b52fbde3fd897ff30012dc2', 'amz-sdk-invocation-id': b'a4d47090-0e8a-41c3-9449-3693128f62fc', 'amz-sdk-request': b'attempt=1', 'Content-Length': '73'}>
+2024-09-29 22:25:35,204 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:25:35,204 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:25:36,861 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 411
+2024-09-29 22:25:36,862 - DEBUG - Response headers: {'x-amzn-RequestId': 'a5ee14d1-6811-4978-93e3-3861ea0e8740', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '411', 'Date': 'Sun, 29 Sep 2024 14:25:36 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:25:36,862 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<StartInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>a5ee14d1-6811-4978-93e3-3861ea0e8740</requestId><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><currentState><code>0</code><name>pending</name></currentState><previousState><code>80</code><name>stopped</name></previousState></item></instancesSet></StartInstancesResponse>'
+2024-09-29 22:25:36,863 - DEBUG - Event needs-retry.ec2.StartInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002C29DE4EF70>
+2024-09-29 22:25:36,863 - DEBUG - No retry needed.
+2024-09-29 22:25:36,864 - DEBUG - Response: {'StartingInstances': [{'CurrentState': {'Code': 0, 'Name': 'pending'}, 'InstanceId': 'i-034544d95b9703bfc', 'PreviousState': {'Code': 80, 'Name': 'stopped'}}], 'ResponseMetadata': {'RequestId': 'a5ee14d1-6811-4978-93e3-3861ea0e8740', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'a5ee14d1-6811-4978-93e3-3861ea0e8740', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '411', 'date': 'Sun, 29 Sep 2024 14:25:36 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}
+2024-09-29 22:25:36,864 - DEBUG - Calling ec2:wait_until_running with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-29 22:25:36,928 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\waiters-2.json
+2024-09-29 22:25:36,930 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000002C28E0B3AC0>>
+2024-09-29 22:25:36,930 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000002C28E0B65E0>
+2024-09-29 22:25:36,930 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:25:36,930 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:25:36,930 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000002C28E0B6280>
+2024-09-29 22:25:36,930 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000002C28E0B9E50>
+2024-09-29 22:25:36,930 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002C29DE2EBB0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:25:36,931 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002C29DE2EB20>>
+2024-09-29 22:25:36,931 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000002C28E0B64C0>
+2024-09-29 22:25:36,931 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:25:36,931 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142536Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:25:36,931 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142536Z
+20240929/us-east-1/ec2/aws4_request
+1e1c0720a041d2cf75c5b9b33c9451281cf105489bda86a6d2ba1e8974e09e6f
+2024-09-29 22:25:36,931 - DEBUG - Signature:
+e8769294cbfb508ae575521c012f3b127307f29352db910e9f558f40a6bacd40
+2024-09-29 22:25:36,931 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000002C28E0BC550>
+2024-09-29 22:25:36,931 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142536Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=e8769294cbfb508ae575521c012f3b127307f29352db910e9f558f40a6bacd40', 'amz-sdk-invocation-id': b'b09d6ffd-85b6-4998-8eb9-be0f3de0150c', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:25:36,932 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:25:37,226 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4182
+2024-09-29 22:25:37,228 - DEBUG - Response headers: {'x-amzn-RequestId': 'abfff59b-5031-44c6-b295-96dbd85bf699', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4182', 'Date': 'Sun, 29 Sep 2024 14:25:37 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:25:37,228 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>abfff59b-5031-44c6-b295-96dbd85bf699</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>0</code><name>pending</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName/><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attaching</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attaching</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>pending</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:25:37,233 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002C29DE4EF70>
+2024-09-29 22:25:37,233 - DEBUG - No retry needed.
+2024-09-29 22:25:52,239 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000002C28E0B3AC0>>
+2024-09-29 22:25:52,239 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000002C28E0B65E0>
+2024-09-29 22:25:52,239 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:25:52,239 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:25:52,240 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000002C28E0B6280>
+2024-09-29 22:25:52,240 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000002C28E0B9E50>
+2024-09-29 22:25:52,240 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002C29DE2EBB0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:25:52,240 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002C29DE2EB20>>
+2024-09-29 22:25:52,241 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000002C28E0B64C0>
+2024-09-29 22:25:52,241 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:25:52,241 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142552Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:25:52,241 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142552Z
+20240929/us-east-1/ec2/aws4_request
+5f444bebb65c3d28d76864d372e9759ef65f07234f38174a3e2ba05eafce3cf0
+2024-09-29 22:25:52,242 - DEBUG - Signature:
+8b798bb08147d13a21c605612f3984dacc282ab808d1394ac59cbd8cc75dfead
+2024-09-29 22:25:52,242 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000002C28E0BC550>
+2024-09-29 22:25:52,242 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142552Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=8b798bb08147d13a21c605612f3984dacc282ab808d1394ac59cbd8cc75dfead', 'amz-sdk-invocation-id': b'35e1af9c-3c2e-422a-bbf7-99f4f7b0e654', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:25:52,243 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:25:52,599 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:25:52,821 - DEBUG - Response headers: {'x-amzn-RequestId': '9a9f38dc-2fe3-43ad-ae4c-02172fde90e7', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:25:52 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:25:52,821 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>9a9f38dc-2fe3-43ad-ae4c-02172fde90e7</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:25:52,824 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002C29DE4EF70>
+2024-09-29 22:25:52,825 - DEBUG - No retry needed.
+2024-09-29 22:25:52,825 - DEBUG - Waiting complete, waiter matched the success state.
+2024-09-29 22:25:52,825 - DEBUG - Response: None
+2024-09-29 22:25:52,826 - DEBUG - Calling ec2:describe_instances with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-29 22:25:52,826 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000002C28E0B3AC0>>
+2024-09-29 22:25:52,826 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000002C28E0B65E0>
+2024-09-29 22:25:52,826 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:25:52,826 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:25:52,827 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000002C28E0B6280>
+2024-09-29 22:25:52,827 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000002C28E0B9E50>
+2024-09-29 22:25:52,827 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000002C29DE2EBB0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:25:52,827 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000002C29DE2EB20>>
+2024-09-29 22:25:52,827 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000002C28E0B64C0>
+2024-09-29 22:25:52,827 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:25:52,827 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142552Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:25:52,827 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142552Z
+20240929/us-east-1/ec2/aws4_request
+5f444bebb65c3d28d76864d372e9759ef65f07234f38174a3e2ba05eafce3cf0
+2024-09-29 22:25:52,827 - DEBUG - Signature:
+8b798bb08147d13a21c605612f3984dacc282ab808d1394ac59cbd8cc75dfead
+2024-09-29 22:25:52,827 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000002C28E0BC550>
+2024-09-29 22:25:52,828 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142552Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=8b798bb08147d13a21c605612f3984dacc282ab808d1394ac59cbd8cc75dfead', 'amz-sdk-invocation-id': b'1719d33e-30de-4dae-827e-99318c3ab2c6', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:25:52,828 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:25:53,136 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:25:53,137 - DEBUG - Response headers: {'x-amzn-RequestId': '3833836e-36ca-44ee-a38b-b9f92fc138ba', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:25:52 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:25:53,137 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>3833836e-36ca-44ee-a38b-b9f92fc138ba</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:25:53,140 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000002C29DE4EF70>
+2024-09-29 22:25:53,140 - DEBUG - No retry needed.
+2024-09-29 22:25:53,141 - DEBUG - Response: {'Reservations': [{'Groups': [], 'Instances': [{'AmiLaunchIndex': 0, 'ImageId': 'ami-0d3b373c25c9759e3', 'InstanceId': 'i-034544d95b9703bfc', 'InstanceType': 'g4dn.xlarge', 'KeyName': 'frank-key', 'LaunchTime': datetime.datetime(2024, 9, 29, 14, 25, 36, tzinfo=tzutc()), 'Monitoring': {'State': 'disabled'}, 'Placement': {'AvailabilityZone': 'us-east-1a', 'GroupName': '', 'Tenancy': 'default'}, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'ProductCodes': [], 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIpAddress': '18.204.206.140', 'State': {'Code': 16, 'Name': 'running'}, 'StateTransitionReason': '', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'Architecture': 'x86_64', 'BlockDeviceMappings': [{'DeviceName': '/dev/xvda', 'Ebs': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 26, tzinfo=tzutc()), 'DeleteOnTermination': True, 'Status': 'attached', 'VolumeId': 'vol-035d66a40f8d7f12c'}}], 'ClientToken': '8228e04f-c962-4226-aff1-a6ce3ceed88a', 'EbsOptimized': True, 'EnaSupport': True, 'Hypervisor': 'xen', 'NetworkInterfaces': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Attachment': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'AttachmentId': 'eni-attach-0a14e84fea6b36baf', 'DeleteOnTermination': True, 'DeviceIndex': 0, 'Status': 'attached', 'NetworkCardIndex': 0}, 'Description': '', 'Groups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'Ipv6Addresses': [], 'MacAddress': '12:75:20:1a:c1:09', 'NetworkInterfaceId': 'eni-0bec3c86a6f8d5e6f', 'OwnerId': '533267330159', 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'PrivateIpAddresses': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Primary': True, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31'}], 'SourceDestCheck': True, 'Status': 'in-use', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'InterfaceType': 'interface'}], 'RootDeviceName': '/dev/xvda', 'RootDeviceType': 'ebs', 'SecurityGroups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'SourceDestCheck': True, 'Tags': [{'Key': 'Name', 'Value': 'frank-AI'}], 'VirtualizationType': 'hvm', 'CpuOptions': {'CoreCount': 2, 'ThreadsPerCore': 2}, 'CapacityReservationSpecification': {'CapacityReservationPreference': 'open'}, 'HibernationOptions': {'Configured': False}, 'MetadataOptions': {'State': 'applied', 'HttpTokens': 'required', 'HttpPutResponseHopLimit': 2, 'HttpEndpoint': 'enabled', 'HttpProtocolIpv6': 'disabled', 'InstanceMetadataTags': 'disabled'}, 'EnclaveOptions': {'Enabled': False}, 'PlatformDetails': 'Linux/UNIX', 'UsageOperation': 'RunInstances', 'UsageOperationUpdateTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'PrivateDnsNameOptions': {'HostnameType': 'ip-name', 'EnableResourceNameDnsARecord': True, 'EnableResourceNameDnsAAAARecord': False}, 'MaintenanceOptions': {'AutoRecovery': 'default'}, 'CurrentInstanceBootMode': 'legacy-bios'}], 'OwnerId': '533267330159', 'ReservationId': 'r-0c02d0403b13b2de9'}], 'ResponseMetadata': {'RequestId': '3833836e-36ca-44ee-a38b-b9f92fc138ba', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '3833836e-36ca-44ee-a38b-b9f92fc138ba', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '4597', 'date': 'Sun, 29 Sep 2024 14:25:52 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}
+2024-09-29 22:26:14,214 - DEBUG - Creating converter from 3 to 5
+2024-09-29 22:26:14,352 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:26:18,433 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:26:23,443 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:26:27,526 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:26:32,544 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:26:36,617 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:26:41,631 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:26:50,366 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-09-29 22:26:50,369 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-09-29 22:26:50,370 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-09-29 22:26:50,371 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-09-29 22:26:50,371 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-09-29 22:26:50,372 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-09-29 22:26:50,372 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-09-29 22:26:50,374 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-09-29 22:26:50,374 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-09-29 22:26:50,374 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-09-29 22:26:50,374 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-09-29 22:26:50,377 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\endpoints.json
+2024-09-29 22:26:50,393 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\sdk-default-configuration.json
+2024-09-29 22:26:50,394 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001DB3EF280D0>
+2024-09-29 22:26:50,467 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\service-2.json.gz
+2024-09-29 22:26:50,670 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\endpoint-rule-set-1.json.gz
+2024-09-29 22:26:50,670 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\partitions.json
+2024-09-29 22:26:50,680 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x000001DB444BF310>
+2024-09-29 22:26:50,681 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:26:50,681 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:26:50,681 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:26:50,681 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:26:50,681 - DEBUG - No configured endpoint found.
+2024-09-29 22:26:50,683 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:26:50,685 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\_retry.json
+2024-09-29 22:26:50,687 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:26:50,688 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000001DB3EF33AF0>>
+2024-09-29 22:26:50,688 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000001DB3EF365E0>
+2024-09-29 22:26:50,688 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:26:50,688 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:26:50,689 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000001DB3EF36280>
+2024-09-29 22:26:50,689 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000001DB3EF39E50>
+2024-09-29 22:26:50,689 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000001DB4EAA5700>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:26:50,689 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000001DB4EAA5850>>
+2024-09-29 22:26:50,689 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000001DB3EF364C0>
+2024-09-29 22:26:50,690 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:26:50,690 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142650Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:26:50,690 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142650Z
+20240929/us-east-1/ec2/aws4_request
+b9582d1d7400ffacffd79f822a8ca2ea8db1ed699da1a7bcf80356074a971c13
+2024-09-29 22:26:50,690 - DEBUG - Signature:
+c2f7f099ffeb66eebaf79c53efbb2278cf62f4a6638ca93cbec96d618c73b253
+2024-09-29 22:26:50,690 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000001DB3EF3B550>
+2024-09-29 22:26:50,690 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64', 'X-Amz-Date': b'20240929T142650Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=c2f7f099ffeb66eebaf79c53efbb2278cf62f4a6638ca93cbec96d618c73b253', 'amz-sdk-invocation-id': b'2152e189-520d-4da1-9496-3a928f59e3f7', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:26:50,690 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:26:50,691 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:26:53,969 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:26:53,971 - DEBUG - Response headers: {'x-amzn-RequestId': '96811e26-2321-4ac1-bab7-b9aae38d892c', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:26:53 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:26:53,971 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>96811e26-2321-4ac1-bab7-b9aae38d892c</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:26:53,976 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000001DB4EAD1D00>
+2024-09-29 22:26:53,976 - DEBUG - No retry needed.
+2024-09-29 22:26:54,024 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\boto3\data\ec2\2016-11-15\resources-1.json
+2024-09-29 22:26:54,026 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001DB3EF280D0>
+2024-09-29 22:26:54,031 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x000001DB444BF310>
+2024-09-29 22:26:54,032 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:26:54,032 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:26:54,032 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:26:54,032 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:26:54,032 - DEBUG - No configured endpoint found.
+2024-09-29 22:26:54,033 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:26:54,034 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:26:54,035 - DEBUG - Loading ec2:ec2
+2024-09-29 22:26:54,037 - DEBUG - Event creating-resource-class.ec2.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x000001DB4CE24AF0>
+2024-09-29 22:26:54,039 - DEBUG - Loading ec2:Instance
+2024-09-29 22:26:54,039 - DEBUG - Renaming Instance attribute network_interfaces
+2024-09-29 22:26:54,041 - DEBUG - Event creating-resource-class.ec2.Instance: calling handler <function lazy_call.<locals>._handler at 0x000001DB4CE24B80>
+2024-09-29 22:26:54,042 - DEBUG - Calling ec2:describe_instances with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-29 22:26:54,042 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x000001DB3EF33AF0>>
+2024-09-29 22:26:54,042 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x000001DB3EF365E0>
+2024-09-29 22:26:54,042 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:26:54,042 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:26:54,043 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x000001DB3EF36280>
+2024-09-29 22:26:54,043 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x000001DB3EF39E50>
+2024-09-29 22:26:54,043 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x000001DB4ECF14C0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:26:54,043 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x000001DB4ECF1430>>
+2024-09-29 22:26:54,043 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x000001DB3EF364C0>
+2024-09-29 22:26:54,043 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:26:54,043 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142654Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:26:54,043 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142654Z
+20240929/us-east-1/ec2/aws4_request
+7a0e2ece528012212dd111707fd18b281110980c64ae1555b76f02a6ac37dbf9
+2024-09-29 22:26:54,043 - DEBUG - Signature:
+0795c07980a12b20a250b62783057d50be996cd095e51fd2fc2d8346054cc93e
+2024-09-29 22:26:54,044 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x000001DB3EF3B550>
+2024-09-29 22:26:54,044 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142654Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=0795c07980a12b20a250b62783057d50be996cd095e51fd2fc2d8346054cc93e', 'amz-sdk-invocation-id': b'578253d8-db5f-48c1-8535-7bf5a11aa2b0', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:26:54,044 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:26:54,044 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:26:55,394 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:26:55,395 - DEBUG - Response headers: {'x-amzn-RequestId': '6ec42842-320e-46e7-8760-60b3ac51a872', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:26:55 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:26:55,395 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>6ec42842-320e-46e7-8760-60b3ac51a872</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:26:55,400 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x000001DB4ED10880>
+2024-09-29 22:26:55,400 - DEBUG - No retry needed.
+2024-09-29 22:26:55,400 - DEBUG - Response: {'Reservations': [{'Groups': [], 'Instances': [{'AmiLaunchIndex': 0, 'ImageId': 'ami-0d3b373c25c9759e3', 'InstanceId': 'i-034544d95b9703bfc', 'InstanceType': 'g4dn.xlarge', 'KeyName': 'frank-key', 'LaunchTime': datetime.datetime(2024, 9, 29, 14, 25, 36, tzinfo=tzutc()), 'Monitoring': {'State': 'disabled'}, 'Placement': {'AvailabilityZone': 'us-east-1a', 'GroupName': '', 'Tenancy': 'default'}, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'ProductCodes': [], 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIpAddress': '18.204.206.140', 'State': {'Code': 16, 'Name': 'running'}, 'StateTransitionReason': '', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'Architecture': 'x86_64', 'BlockDeviceMappings': [{'DeviceName': '/dev/xvda', 'Ebs': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 26, tzinfo=tzutc()), 'DeleteOnTermination': True, 'Status': 'attached', 'VolumeId': 'vol-035d66a40f8d7f12c'}}], 'ClientToken': '8228e04f-c962-4226-aff1-a6ce3ceed88a', 'EbsOptimized': True, 'EnaSupport': True, 'Hypervisor': 'xen', 'NetworkInterfaces': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Attachment': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'AttachmentId': 'eni-attach-0a14e84fea6b36baf', 'DeleteOnTermination': True, 'DeviceIndex': 0, 'Status': 'attached', 'NetworkCardIndex': 0}, 'Description': '', 'Groups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'Ipv6Addresses': [], 'MacAddress': '12:75:20:1a:c1:09', 'NetworkInterfaceId': 'eni-0bec3c86a6f8d5e6f', 'OwnerId': '533267330159', 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'PrivateIpAddresses': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Primary': True, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31'}], 'SourceDestCheck': True, 'Status': 'in-use', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'InterfaceType': 'interface'}], 'RootDeviceName': '/dev/xvda', 'RootDeviceType': 'ebs', 'SecurityGroups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'SourceDestCheck': True, 'Tags': [{'Key': 'Name', 'Value': 'frank-AI'}], 'VirtualizationType': 'hvm', 'CpuOptions': {'CoreCount': 2, 'ThreadsPerCore': 2}, 'CapacityReservationSpecification': {'CapacityReservationPreference': 'open'}, 'HibernationOptions': {'Configured': False}, 'MetadataOptions': {'State': 'applied', 'HttpTokens': 'required', 'HttpPutResponseHopLimit': 2, 'HttpEndpoint': 'enabled', 'HttpProtocolIpv6': 'disabled', 'InstanceMetadataTags': 'disabled'}, 'EnclaveOptions': {'Enabled': False}, 'PlatformDetails': 'Linux/UNIX', 'UsageOperation': 'RunInstances', 'UsageOperationUpdateTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'PrivateDnsNameOptions': {'HostnameType': 'ip-name', 'EnableResourceNameDnsARecord': True, 'EnableResourceNameDnsAAAARecord': False}, 'MaintenanceOptions': {'AutoRecovery': 'default'}, 'CurrentInstanceBootMode': 'legacy-bios'}], 'OwnerId': '533267330159', 'ReservationId': 'r-0c02d0403b13b2de9'}], 'ResponseMetadata': {'RequestId': '6ec42842-320e-46e7-8760-60b3ac51a872', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '6ec42842-320e-46e7-8760-60b3ac51a872', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '4597', 'date': 'Sun, 29 Sep 2024 14:26:55 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}
+2024-09-29 22:27:15,887 - DEBUG - Creating converter from 3 to 5
+2024-09-29 22:27:15,944 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:27:23,015 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:27:28,020 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:27:32,105 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:27:37,114 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:27:41,214 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:27:53,804 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-09-29 22:27:53,806 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-09-29 22:27:53,806 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-09-29 22:27:53,808 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-09-29 22:27:53,808 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-09-29 22:27:53,808 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-09-29 22:27:53,809 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-09-29 22:27:53,811 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-09-29 22:27:53,811 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-09-29 22:27:53,811 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-09-29 22:27:53,811 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-09-29 22:27:53,815 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\endpoints.json
+2024-09-29 22:27:53,830 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\sdk-default-configuration.json
+2024-09-29 22:27:53,831 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x00000139D8B780D0>
+2024-09-29 22:27:53,909 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\service-2.json.gz
+2024-09-29 22:27:54,102 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\endpoint-rule-set-1.json.gz
+2024-09-29 22:27:54,102 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\partitions.json
+2024-09-29 22:27:54,113 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x00000139DE11F310>
+2024-09-29 22:27:54,113 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:27:54,113 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:27:54,113 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:27:54,113 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:27:54,113 - DEBUG - No configured endpoint found.
+2024-09-29 22:27:54,115 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:27:54,117 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\_retry.json
+2024-09-29 22:27:54,119 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:27:54,120 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x00000139D8B83B50>>
+2024-09-29 22:27:54,120 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x00000139D8B865E0>
+2024-09-29 22:27:54,120 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:27:54,121 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:27:54,121 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x00000139D8B86280>
+2024-09-29 22:27:54,121 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x00000139D8B89E50>
+2024-09-29 22:27:54,121 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x00000139E86B57F0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:27:54,121 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x00000139E86B5940>>
+2024-09-29 22:27:54,121 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x00000139D8B864C0>
+2024-09-29 22:27:54,122 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:27:54,122 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142754Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:27:54,122 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142754Z
+20240929/us-east-1/ec2/aws4_request
+ffcf0e18879cca8f597d4e23b62fd30e49674368fb9f46b48da4d5bb7267a6dd
+2024-09-29 22:27:54,122 - DEBUG - Signature:
+8b40d8aaa593b5afdc7be04f7e867b2dd1c12cf1defdcb5b713ea60778d3ab23
+2024-09-29 22:27:54,122 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x00000139D8B8B550>
+2024-09-29 22:27:54,122 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64', 'X-Amz-Date': b'20240929T142754Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=8b40d8aaa593b5afdc7be04f7e867b2dd1c12cf1defdcb5b713ea60778d3ab23', 'amz-sdk-invocation-id': b'3568ecdb-5b1f-4a60-af56-6bb9cea00a4c', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:27:54,123 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:27:54,123 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:28:17,980 - DEBUG - Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\httpsession.py", line 464, in send
+    urllib_response = conn.urlopen(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 1058, in _validate_conn
+    conn.connect()
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x00000139E87008B0>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\endpoint.py", line 281, in _do_get_response
+    http_response = self._send(request)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\endpoint.py", line 377, in _send
+    return self.http_session.send(request)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\httpsession.py", line 493, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://ec2.us-east-1.amazonaws.com/"
+2024-09-29 22:28:18,064 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x00000139E86E1DF0>
+2024-09-29 22:28:18,064 - DEBUG - retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://ec2.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\httpsession.py", line 464, in send
+    urllib_response = conn.urlopen(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connectionpool.py", line 1058, in _validate_conn
+    conn.connect()
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x00000139E87008B0>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\retryhandler.py", line 307, in _should_retry
+    return self._checker(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\retryhandler.py", line 363, in __call__
+    checker_response = checker(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\retryhandler.py", line 247, in __call__
+    return self._check_caught_exception(
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\retryhandler.py", line 416, in _check_caught_exception
+    raise caught_exception
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\endpoint.py", line 281, in _do_get_response
+    http_response = self._send(request)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\endpoint.py", line 377, in _send
+    return self.http_session.send(request)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\httpsession.py", line 493, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://ec2.us-east-1.amazonaws.com/"
+2024-09-29 22:28:18,074 - DEBUG - Retry needed, action of: 0.5186775592211356
+2024-09-29 22:28:18,074 - DEBUG - Response received to retry, sleeping for 0.5186775592211356 seconds
+2024-09-29 22:28:18,599 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x00000139E86B5940>>
+2024-09-29 22:28:18,599 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x00000139D8B864C0>
+2024-09-29 22:28:18,600 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:28:18,600 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142818Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:28:18,600 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142818Z
+20240929/us-east-1/ec2/aws4_request
+e1d7b23001f28a747613abec01d4ac7a0d4485970dee21099fa40a33fb651f08
+2024-09-29 22:28:18,600 - DEBUG - Signature:
+092d2df2a3bf113b6ed4b8d8fd07ea39c958ea5333a0d2f439571f2c00011c07
+2024-09-29 22:28:18,601 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x00000139D8B8B550>
+2024-09-29 22:28:18,601 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64', 'X-Amz-Date': b'20240929T142818Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=092d2df2a3bf113b6ed4b8d8fd07ea39c958ea5333a0d2f439571f2c00011c07', 'amz-sdk-invocation-id': b'3568ecdb-5b1f-4a60-af56-6bb9cea00a4c', 'amz-sdk-request': b'attempt=2; max=5', 'Content-Length': '76'}>
+2024-09-29 22:28:18,601 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:28:18,602 - DEBUG - Starting new HTTPS connection (2): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:28:22,044 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:28:22,055 - DEBUG - Response headers: {'x-amzn-RequestId': '24b75cc9-59c5-471c-8b81-3d5946c3401e', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:28:21 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:28:22,055 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>24b75cc9-59c5-471c-8b81-3d5946c3401e</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:28:22,060 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x00000139E86E1DF0>
+2024-09-29 22:28:22,061 - DEBUG - No retry needed.
+2024-09-29 22:28:22,119 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\boto3\data\ec2\2016-11-15\resources-1.json
+2024-09-29 22:28:22,121 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x00000139D8B780D0>
+2024-09-29 22:28:22,129 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x00000139DE11F310>
+2024-09-29 22:28:22,130 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:28:22,130 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:28:22,130 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:28:22,130 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:28:22,130 - DEBUG - No configured endpoint found.
+2024-09-29 22:28:22,131 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:28:22,132 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:28:22,133 - DEBUG - Loading ec2:ec2
+2024-09-29 22:28:22,135 - DEBUG - Event creating-resource-class.ec2.ServiceResource: calling handler <function lazy_call.<locals>._handler at 0x00000139E6A74AF0>
+2024-09-29 22:28:22,137 - DEBUG - Loading ec2:Instance
+2024-09-29 22:28:22,138 - DEBUG - Renaming Instance attribute network_interfaces
+2024-09-29 22:28:22,139 - DEBUG - Event creating-resource-class.ec2.Instance: calling handler <function lazy_call.<locals>._handler at 0x00000139E6A74B80>
+2024-09-29 22:28:22,140 - DEBUG - Calling ec2:describe_instances with {'InstanceIds': ['i-034544d95b9703bfc']}
+2024-09-29 22:28:22,141 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x00000139D8B83B50>>
+2024-09-29 22:28:22,141 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x00000139D8B865E0>
+2024-09-29 22:28:22,141 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:28:22,141 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:28:22,141 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x00000139D8B86280>
+2024-09-29 22:28:22,141 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x00000139D8B89E50>
+2024-09-29 22:28:22,141 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x00000139E89975B0>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:28:22,142 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x00000139E8997520>>
+2024-09-29 22:28:22,142 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x00000139D8B864C0>
+2024-09-29 22:28:22,142 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:28:22,142 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T142822Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:28:22,142 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T142822Z
+20240929/us-east-1/ec2/aws4_request
+05b9d9c4d2fd97efb88dda4c599431ac052a728c10b19d4c53e19c5e10052516
+2024-09-29 22:28:22,142 - DEBUG - Signature:
+57a84703c49c19fee08743768a681749d231eee3f638ef69cef5eed0198af97d
+2024-09-29 22:28:22,142 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x00000139D8B8B550>
+2024-09-29 22:28:22,142 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64 Resource', 'X-Amz-Date': b'20240929T142822Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=57a84703c49c19fee08743768a681749d231eee3f638ef69cef5eed0198af97d', 'amz-sdk-invocation-id': b'1611173b-37b5-4517-9437-3cd3bac09eeb', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:28:22,143 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:28:22,143 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:28:41,234 - DEBUG - https://ec2.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 4597
+2024-09-29 22:28:41,234 - DEBUG - Response headers: {'x-amzn-RequestId': '5002ee64-d3b5-4b6c-89ad-975c7addca6a', 'Cache-Control': 'no-cache, no-store', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'Content-Type': 'text/xml;charset=UTF-8', 'Content-Length': '4597', 'Date': 'Sun, 29 Sep 2024 14:28:40 GMT', 'Server': 'AmazonEC2'}
+2024-09-29 22:28:41,234 - DEBUG - Response body:
+b'<?xml version="1.0" encoding="UTF-8"?>\n<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/"><requestId>5002ee64-d3b5-4b6c-89ad-975c7addca6a</requestId><reservationSet><item><reservationId>r-0c02d0403b13b2de9</reservationId><ownerId>533267330159</ownerId><groupSet/><instancesSet><item><instanceId>i-034544d95b9703bfc</instanceId><imageId>ami-0d3b373c25c9759e3</imageId><instanceState><code>16</code><name>running</name></instanceState><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><dnsName>ec2-18-204-206-140.compute-1.amazonaws.com</dnsName><reason/><keyName>frank-key</keyName><amiLaunchIndex>0</amiLaunchIndex><productCodes/><instanceType>g4dn.xlarge</instanceType><launchTime>2024-09-29T14:25:36.000Z</launchTime><placement><availabilityZone>us-east-1a</availabilityZone><groupName/><tenancy>default</tenancy></placement><monitoring><state>disabled</state></monitoring><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><privateIpAddress>172.31.95.31</privateIpAddress><ipAddress>18.204.206.140</ipAddress><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><architecture>x86_64</architecture><rootDeviceType>ebs</rootDeviceType><rootDeviceName>/dev/xvda</rootDeviceName><blockDeviceMapping><item><deviceName>/dev/xvda</deviceName><ebs><volumeId>vol-035d66a40f8d7f12c</volumeId><status>attached</status><attachTime>2024-05-14T13:31:26.000Z</attachTime><deleteOnTermination>true</deleteOnTermination></ebs></item></blockDeviceMapping><virtualizationType>hvm</virtualizationType><clientToken>8228e04f-c962-4226-aff1-a6ce3ceed88a</clientToken><tagSet><item><key>Name</key><value>frank-AI</value></item></tagSet><hypervisor>xen</hypervisor><networkInterfaceSet><item><networkInterfaceId>eni-0bec3c86a6f8d5e6f</networkInterfaceId><subnetId>subnet-04e28245a9d3b9dc6</subnetId><vpcId>vpc-022c2999afb61a527</vpcId><description/><ownerId>533267330159</ownerId><status>in-use</status><macAddress>12:75:20:1a:c1:09</macAddress><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><sourceDestCheck>true</sourceDestCheck><groupSet><item><groupId>sg-034772d219123df30</groupId><groupName>launch-wizard-10</groupName></item></groupSet><attachment><attachmentId>eni-attach-0a14e84fea6b36baf</attachmentId><deviceIndex>0</deviceIndex><status>attached</status><attachTime>2024-05-14T13:31:25.000Z</attachTime><deleteOnTermination>true</deleteOnTermination><networkCardIndex>0</networkCardIndex></attachment><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association><privateIpAddressesSet><item><privateIpAddress>172.31.95.31</privateIpAddress><privateDnsName>ip-172-31-95-31.ec2.internal</privateDnsName><primary>true</primary><association><publicIp>18.204.206.140</publicIp><publicDnsName>ec2-18-204-206-140.compute-1.amazonaws.com</publicDnsName><ipOwnerId>amazon</ipOwnerId></association></item></privateIpAddressesSet><ipv6AddressesSet/><interfaceType>interface</interfaceType></item></networkInterfaceSet><ebsOptimized>true</ebsOptimized><enaSupport>true</enaSupport><cpuOptions><coreCount>2</coreCount><threadsPerCore>2</threadsPerCore></cpuOptions><capacityReservationSpecification><capacityReservationPreference>open</capacityReservationPreference></capacityReservationSpecification><hibernationOptions><configured>false</configured></hibernationOptions><enclaveOptions><enabled>false</enabled></enclaveOptions><metadataOptions><state>applied</state><httpTokens>required</httpTokens><httpPutResponseHopLimit>2</httpPutResponseHopLimit><httpEndpoint>enabled</httpEndpoint><httpProtocolIpv4>enabled</httpProtocolIpv4><httpProtocolIpv6>disabled</httpProtocolIpv6><instanceMetadataTags>disabled</instanceMetadataTags></metadataOptions><maintenanceOptions><autoRecovery>default</autoRecovery><rebootMigration>default</rebootMigration></maintenanceOptions><currentInstanceBootMode>legacy-bios</currentInstanceBootMode><platformDetails>Linux/UNIX</platformDetails><usageOperation>RunInstances</usageOperation><usageOperationUpdateTime>2024-05-14T13:31:25.000Z</usageOperationUpdateTime><privateDnsNameOptions><hostnameType>ip-name</hostnameType><enableResourceNameDnsARecord>true</enableResourceNameDnsARecord><enableResourceNameDnsAAAARecord>false</enableResourceNameDnsAAAARecord></privateDnsNameOptions></item></instancesSet></item></reservationSet></DescribeInstancesResponse>'
+2024-09-29 22:28:41,236 - DEBUG - Event needs-retry.ec2.DescribeInstances: calling handler <botocore.retryhandler.RetryHandler object at 0x00000139E89AE970>
+2024-09-29 22:28:41,236 - DEBUG - No retry needed.
+2024-09-29 22:28:41,237 - DEBUG - Response: {'Reservations': [{'Groups': [], 'Instances': [{'AmiLaunchIndex': 0, 'ImageId': 'ami-0d3b373c25c9759e3', 'InstanceId': 'i-034544d95b9703bfc', 'InstanceType': 'g4dn.xlarge', 'KeyName': 'frank-key', 'LaunchTime': datetime.datetime(2024, 9, 29, 14, 25, 36, tzinfo=tzutc()), 'Monitoring': {'State': 'disabled'}, 'Placement': {'AvailabilityZone': 'us-east-1a', 'GroupName': '', 'Tenancy': 'default'}, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'ProductCodes': [], 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIpAddress': '18.204.206.140', 'State': {'Code': 16, 'Name': 'running'}, 'StateTransitionReason': '', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'Architecture': 'x86_64', 'BlockDeviceMappings': [{'DeviceName': '/dev/xvda', 'Ebs': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 26, tzinfo=tzutc()), 'DeleteOnTermination': True, 'Status': 'attached', 'VolumeId': 'vol-035d66a40f8d7f12c'}}], 'ClientToken': '8228e04f-c962-4226-aff1-a6ce3ceed88a', 'EbsOptimized': True, 'EnaSupport': True, 'Hypervisor': 'xen', 'NetworkInterfaces': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Attachment': {'AttachTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'AttachmentId': 'eni-attach-0a14e84fea6b36baf', 'DeleteOnTermination': True, 'DeviceIndex': 0, 'Status': 'attached', 'NetworkCardIndex': 0}, 'Description': '', 'Groups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'Ipv6Addresses': [], 'MacAddress': '12:75:20:1a:c1:09', 'NetworkInterfaceId': 'eni-0bec3c86a6f8d5e6f', 'OwnerId': '533267330159', 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31', 'PrivateIpAddresses': [{'Association': {'IpOwnerId': 'amazon', 'PublicDnsName': 'ec2-18-204-206-140.compute-1.amazonaws.com', 'PublicIp': '18.204.206.140'}, 'Primary': True, 'PrivateDnsName': 'ip-172-31-95-31.ec2.internal', 'PrivateIpAddress': '172.31.95.31'}], 'SourceDestCheck': True, 'Status': 'in-use', 'SubnetId': 'subnet-04e28245a9d3b9dc6', 'VpcId': 'vpc-022c2999afb61a527', 'InterfaceType': 'interface'}], 'RootDeviceName': '/dev/xvda', 'RootDeviceType': 'ebs', 'SecurityGroups': [{'GroupName': 'launch-wizard-10', 'GroupId': 'sg-034772d219123df30'}], 'SourceDestCheck': True, 'Tags': [{'Key': 'Name', 'Value': 'frank-AI'}], 'VirtualizationType': 'hvm', 'CpuOptions': {'CoreCount': 2, 'ThreadsPerCore': 2}, 'CapacityReservationSpecification': {'CapacityReservationPreference': 'open'}, 'HibernationOptions': {'Configured': False}, 'MetadataOptions': {'State': 'applied', 'HttpTokens': 'required', 'HttpPutResponseHopLimit': 2, 'HttpEndpoint': 'enabled', 'HttpProtocolIpv6': 'disabled', 'InstanceMetadataTags': 'disabled'}, 'EnclaveOptions': {'Enabled': False}, 'PlatformDetails': 'Linux/UNIX', 'UsageOperation': 'RunInstances', 'UsageOperationUpdateTime': datetime.datetime(2024, 5, 14, 13, 31, 25, tzinfo=tzutc()), 'PrivateDnsNameOptions': {'HostnameType': 'ip-name', 'EnableResourceNameDnsARecord': True, 'EnableResourceNameDnsAAAARecord': False}, 'MaintenanceOptions': {'AutoRecovery': 'default'}, 'CurrentInstanceBootMode': 'legacy-bios'}], 'OwnerId': '533267330159', 'ReservationId': 'r-0c02d0403b13b2de9'}], 'ResponseMetadata': {'RequestId': '5002ee64-d3b5-4b6c-89ad-975c7addca6a', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': '5002ee64-d3b5-4b6c-89ad-975c7addca6a', 'cache-control': 'no-cache, no-store', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'vary': 'accept-encoding', 'content-type': 'text/xml;charset=UTF-8', 'content-length': '4597', 'date': 'Sun, 29 Sep 2024 14:28:40 GMT', 'server': 'AmazonEC2'}, 'RetryAttempts': 0}}
+2024-09-29 22:29:01,671 - DEBUG - Creating converter from 3 to 5
+2024-09-29 22:29:01,725 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:29:05,807 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:29:10,817 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:29:14,893 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:29:19,900 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:29:24,001 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:29:29,006 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:29:33,078 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:29:38,085 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-09-29 22:29:42,167 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-09-29 22:34:29,484 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2024-09-29 22:34:29,486 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2024-09-29 22:34:29,486 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2024-09-29 22:34:29,487 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2024-09-29 22:34:29,487 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2024-09-29 22:34:29,488 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2024-09-29 22:34:29,489 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2024-09-29 22:34:29,491 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2024-09-29 22:34:29,491 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2024-09-29 22:34:29,491 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2024-09-29 22:34:29,491 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2024-09-29 22:34:29,495 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\endpoints.json
+2024-09-29 22:34:29,510 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\sdk-default-configuration.json
+2024-09-29 22:34:29,510 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x0000018930C680D0>
+2024-09-29 22:34:29,582 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\service-2.json.gz
+2024-09-29 22:34:29,774 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\ec2\2016-11-15\endpoint-rule-set-1.json.gz
+2024-09-29 22:34:29,775 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\partitions.json
+2024-09-29 22:34:29,784 - DEBUG - Event creating-client-class.ec2: calling handler <function add_generate_presigned_url at 0x00000189361FF310>
+2024-09-29 22:34:29,784 - DEBUG - Looking for endpoint for ec2 via: environment_service
+2024-09-29 22:34:29,784 - DEBUG - Looking for endpoint for ec2 via: environment_global
+2024-09-29 22:34:29,784 - DEBUG - Looking for endpoint for ec2 via: config_service
+2024-09-29 22:34:29,784 - DEBUG - Looking for endpoint for ec2 via: config_global
+2024-09-29 22:34:29,784 - DEBUG - No configured endpoint found.
+2024-09-29 22:34:29,786 - DEBUG - Setting ec2 timeout as (60, 60)
+2024-09-29 22:34:29,789 - DEBUG - Loading JSON file: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\botocore\data\_retry.json
+2024-09-29 22:34:29,790 - DEBUG - Registering retry handlers for service: ec2
+2024-09-29 22:34:29,791 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <bound method ParameterAlias.alias_parameter_in_call of <botocore.handlers.ParameterAlias object at 0x0000018930C73B20>>
+2024-09-29 22:34:29,791 - DEBUG - Event before-parameter-build.ec2.DescribeInstances: calling handler <function generate_idempotent_uuid at 0x0000018930C765E0>
+2024-09-29 22:34:29,792 - DEBUG - Calling endpoint provider with parameters: {'Region': 'us-east-1', 'UseDualStack': False, 'UseFIPS': False}
+2024-09-29 22:34:29,792 - DEBUG - Endpoint provider result: https://ec2.us-east-1.amazonaws.com
+2024-09-29 22:34:29,792 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function add_recursion_detection_header at 0x0000018930C76280>
+2024-09-29 22:34:29,792 - DEBUG - Event before-call.ec2.DescribeInstances: calling handler <function inject_api_version_header_if_needed at 0x0000018930C79E50>
+2024-09-29 22:34:29,792 - DEBUG - Making request for OperationModel(name=DescribeInstances) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64'}, 'body': {'Action': 'DescribeInstances', 'Version': '2016-11-15', 'InstanceId.1': 'i-034544d95b9703bfc'}, 'url': 'https://ec2.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x00000189407B4790>, 'has_streaming_input': False, 'auth_type': None}}
+2024-09-29 22:34:29,793 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x00000189407B48E0>>
+2024-09-29 22:34:29,793 - DEBUG - Event choose-signer.ec2.DescribeInstances: calling handler <function set_operation_specific_signer at 0x0000018930C764C0>
+2024-09-29 22:34:29,793 - DEBUG - Calculating signature using v4 auth.
+2024-09-29 22:34:29,793 - DEBUG - CanonicalRequest:
+POST
+/
+
+content-type:application/x-www-form-urlencoded; charset=utf-8
+host:ec2.us-east-1.amazonaws.com
+x-amz-date:20240929T143429Z
+
+content-type;host;x-amz-date
+9cfc1aa8ea6224db1a52aa8d42bd3384e05e8ec93434ed73f0a1238320f8f544
+2024-09-29 22:34:29,793 - DEBUG - StringToSign:
+AWS4-HMAC-SHA256
+20240929T143429Z
+20240929/us-east-1/ec2/aws4_request
+e2b80fc795d9326b3d98a1af43b5521f98a50a16a413dd2e469c38456750864d
+2024-09-29 22:34:29,793 - DEBUG - Signature:
+b5e6e0244116ed67b2c4de881dfd928ae9f408ece09fc4440b1383d69e21ec51
+2024-09-29 22:34:29,793 - DEBUG - Event request-created.ec2.DescribeInstances: calling handler <function add_retry_headers at 0x0000018930C7C550>
+2024-09-29 22:34:29,793 - DEBUG - Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://ec2.us-east-1.amazonaws.com/, headers={'Content-Type': b'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': b'Boto3/1.34.64 md/Botocore#1.34.64 ua/2.0 os/windows#10 md/arch#amd64 lang/python#3.8.1 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.64', 'X-Amz-Date': b'20240929T143429Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAXYKJVWRX564KS6AS/20240929/us-east-1/ec2/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=b5e6e0244116ed67b2c4de881dfd928ae9f408ece09fc4440b1383d69e21ec51', 'amz-sdk-invocation-id': b'a319ee06-9c3e-411b-b265-9ac1a8796af8', 'amz-sdk-request': b'attempt=1', 'Content-Length': '76'}>
+2024-09-29 22:34:29,794 - DEBUG - Certificate path: c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\venv\lib\site-packages\certifi\cacert.pem
+2024-09-29 22:34:29,794 - DEBUG - Starting new HTTPS connection (1): ec2.us-east-1.amazonaws.com:443
+2024-09-29 22:37:41,417 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+

@@ -16,6 +16,7 @@ from library.bucket_test import upload_video, upload_video_new
 from library.json_handler import append_tojson, is_item_in_json, read_from_json
 from library.another import manage_item
 from library.aws_connection import start_ec2_instance,stop_ec2_instance
+from library.new import decrypt_new
 
 import socket
 from deepface import DeepFace
@@ -316,6 +317,9 @@ class CustomUI(QMainWindow):
         with open(os.path.join(current_folder,'library','aws_config.json')) as json_file:
             config = json.load(json_file)
         
+        insert_chars_list="xyyuyyyui"
+        key=123
+        config['aws_access_key_id']=decrypt_new(config['aws_access_key_id'], key, [(0, 1), (2, 3)], [18, 21, 1, 25, 27, 8, 19, 12, 16, 22, 10, 7, 3, 11, 4, 24, 15, 20, 23, 13, 2, 26, 17, 14, 28, 0, 6, 5, 9], insert_chars_list)
         # 使用 JSON 中的值配置 boto3 客户端
 
         self.s3_client = boto3.client(
@@ -1640,7 +1644,7 @@ if __name__ == '__main__':
 
     logging.basicConfig(
     filename=os.path.join(current_folder,'output','error_log.txt'),
-    level=logging.DEBUG,
+    level=logging.ERROR,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
