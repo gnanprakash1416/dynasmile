@@ -17,6 +17,7 @@ from library.json_handler import append_tojson, is_item_in_json, read_from_json
 from library.another import manage_item
 from library.aws_connection import start_ec2_instance,stop_ec2_instance
 from library.new import decrypt_new
+from library.key_loader import load_key_api
 
 import socket
 from deepface import DeepFace
@@ -33,6 +34,7 @@ import time
 import logging
 import traceback
 import atexit
+import requests
 
 def log_exception(exc_type, exc_value, exc_traceback):
     if issubclass(exc_type, KeyboardInterrupt):
@@ -314,19 +316,20 @@ class CustomUI(QMainWindow):
 
         # self.s3_resource = boto3.resource('s3')
 
-        with open(os.path.join(current_folder,'library','aws_config.json')) as json_file:
-            config = json.load(json_file)
+        #with open(os.path.join(current_folder,'library','aws_config.json')) as json_file:
+        #    config = json.load(json_file)
+        config,_=load_key_api()
         
         insert_chars_list="xyyuyyyui"
         key=123
-        config['aws_access_key_id']=decrypt_new(config['aws_access_key_id'], key, [(0, 1), (2, 3)], [18, 21, 1, 25, 27, 8, 19, 12, 16, 22, 10, 7, 3, 11, 4, 24, 15, 20, 23, 13, 2, 26, 17, 14, 28, 0, 6, 5, 9], insert_chars_list)
+        config['aws_config_aws_access_key_id']=decrypt_new(config['aws_config_aws_access_key_id'], key, [(0, 1), (2, 3)], [18, 21, 1, 25, 27, 8, 19, 12, 16, 22, 10, 7, 3, 11, 4, 24, 15, 20, 23, 13, 2, 26, 17, 14, 28, 0, 6, 5, 9], insert_chars_list)
         # 使用 JSON 中的值配置 boto3 客户端
 
         self.s3_client = boto3.client(
             's3',
             region_name=config['region_name'],
-            aws_access_key_id=config['aws_access_key_id'],
-            aws_secret_access_key=config['aws_secret_access_key']
+            aws_access_key_id=config['aws_config_aws_access_key_id'],
+            aws_secret_access_key=config['aws_config_aws_secret_access_key']
         )
 
         #self.s3_client = boto3.client('s3')

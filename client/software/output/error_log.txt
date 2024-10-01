@@ -6880,3 +6880,60 @@ b5e6e0244116ed67b2c4de881dfd928ae9f408ece09fc4440b1383d69e21ec51
 2024-09-29 22:37:41,417 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
 Use ALT 1, ALT 2, ALT 3 to start all the programs.
 
+2024-10-01 17:42:26,745 - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1664, in <module>
+    public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 64, in start_ec2_instance
+    instance_status = get_instance_status(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 45, in get_instance_status
+    _,credentials=load_key_api()
+TypeError: cannot unpack non-iterable NoneType object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1679, in <module>
+    stop_ec2_instance(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 123, in stop_ec2_instance
+    _,credentials=load_key_api()
+TypeError: cannot unpack non-iterable NoneType object
+2024-10-01 17:44:26,356 - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1664, in <module>
+    public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 64, in start_ec2_instance
+    instance_status = get_instance_status(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 45, in get_instance_status
+    credentials1,credentials=load_key_api()
+TypeError: cannot unpack non-iterable NoneType object
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1679, in <module>
+    stop_ec2_instance(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 123, in stop_ec2_instance
+    credentials1,credentials=load_key_api()
+TypeError: cannot unpack non-iterable NoneType object
+2024-10-01 17:45:16,796 - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1664, in <module>
+    public_dns=start_ec2_instance(instance_id, credentials_file)["public_dns"]
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 64, in start_ec2_instance
+    instance_status = get_instance_status(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 48, in get_instance_status
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+KeyError: 'aws_access_key_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\main.py", line 1679, in <module>
+    stop_ec2_instance(instance_id, credentials_file)
+  File "c:\Users\dentistfrankchen\Desktop\SoftwareX\Dynasmile\client\software\library\aws_connection.py", line 126, in stop_ec2_instance
+    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+KeyError: 'aws_access_key_id'
+2024-10-01 17:56:23,532 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+

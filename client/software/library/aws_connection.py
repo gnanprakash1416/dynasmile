@@ -3,6 +3,7 @@ import boto3
 import os
 import time
 import random
+from .key_loader import load_key_api
 def xor_encrypt_decrypt(data, key):
     return ''.join(chr(ord(c) ^ key) for c in data)
 def simple_permutation(data, perm):
@@ -39,15 +40,16 @@ def decrypt_new(encrypted_text, key, swap_indices, permutation, insert_chars_lis
     return decrypted
 
 def get_instance_status(instance_id, credentials_file):
-    with open(credentials_file) as f:
-        credentials = json.load(f)
+    #with open(credentials_file) as f:
+    #    credentials = json.load(f)
+    _,credentials=load_key_api()
     insert_chars_list="xyyuyyyui"
     key=123
-    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+    credentials['ec2_config_aws_access_key_id']=decrypt_new(credentials['ec2_config_aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
     ec2 = boto3.client(
         'ec2',
-        aws_access_key_id=credentials['aws_access_key_id'],
-        aws_secret_access_key=credentials['aws_secret_access_key'],
+        aws_access_key_id=credentials['ec2_config_aws_access_key_id'],
+        aws_secret_access_key=credentials['ec2_config_aws_secret_access_key'],
         region_name=credentials['region_name']
     )
     try:
@@ -66,15 +68,16 @@ def start_ec2_instance(instance_id, credentials_file):
     
     if instance_status != 'stopped':
         if instance_status=='running':
-            with open(credentials_file) as f:
-                credentials = json.load(f)
+            #with open(credentials_file) as f:
+            #    credentials = json.load(f)
+            _,credentials=load_key_api()
             insert_chars_list="xyyuyyyui"
             key=123
-            credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+            credentials['ec2_config_aws_access_key_id']=decrypt_new(credentials['ec2_config_aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
             ec2 = boto3.resource(
                 'ec2',
-                aws_access_key_id=credentials['aws_access_key_id'],
-                aws_secret_access_key=credentials['aws_secret_access_key'],
+                aws_access_key_id=credentials['ec2_config_aws_access_key_id'],
+                aws_secret_access_key=credentials['ec2_config_aws_secret_access_key'],
                 region_name=credentials['region_name']
             )
             instance = ec2.Instance(instance_id)
@@ -85,15 +88,16 @@ def start_ec2_instance(instance_id, credentials_file):
         print(f"Instance {instance_id} is currently in '{instance_status}' state. Cannot start.")
         return
     # get aws credential from json
-    with open(credentials_file) as f:
-        credentials = json.load(f)
+    #with open(credentials_file) as f:
+    #    credentials = json.load(f)
+    _,credentials=load_key_api()
     insert_chars_list="xyyuyyyui"
     key=123
-    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+    credentials['ec2_config_aws_access_key_id']=decrypt_new(credentials['ec2_config_aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
     ec2 = boto3.resource(
         'ec2',
-        aws_access_key_id=credentials['aws_access_key_id'],
-        aws_secret_access_key=credentials['aws_secret_access_key'],
+        aws_access_key_id=credentials['ec2_config_aws_access_key_id'],
+        aws_secret_access_key=credentials['ec2_config_aws_secret_access_key'],
         region_name=credentials['region_name']
     )
     instance = ec2.Instance(instance_id)
@@ -114,14 +118,15 @@ def stop_ec2_instance(instance_id, credentials_file, region='us-west-2'):
     :param region: AWS region name
     """
     # Load AWS credentials from the JSON file
-    with open(credentials_file, 'r') as file:
-        credentials = json.load(file)
+    #with open(credentials_file) as f:
+    #    credentials = json.load(f)
+    _,credentials=load_key_api()
     insert_chars_list="xyyuyyyui"
     key=123
-    credentials['aws_access_key_id']=decrypt_new(credentials['aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
+    credentials['ec2_config_aws_access_key_id']=decrypt_new(credentials['ec2_config_aws_access_key_id'], key, [(0, 1), (2, 3)], [7, 28, 1, 26, 0, 9, 23, 6, 10, 25, 24, 20, 3, 21, 18, 5, 27, 15, 8, 4, 2, 11, 12, 22, 19, 17, 16, 14, 13], insert_chars_list)
     try:
-        access_key = credentials['aws_access_key_id']
-        secret_key = credentials['aws_secret_access_key']
+        access_key = credentials['ec2_config_aws_access_key_id']
+        secret_key = credentials['ec2_config_aws_secret_access_key']
         region='us-east-1'
         # Create EC2 resource object
         ec2 = boto3.resource(
