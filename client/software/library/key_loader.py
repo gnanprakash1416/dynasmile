@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+from .crypt import encrypt_aws,encrypt_ec2
 def check_json_file_exists(file_path):
     # Check if the file exists
     if os.path.exists(file_path):
@@ -30,7 +31,7 @@ def load_key_api():
 
     search_target=os.path.join(current_folder,"data.json")
     if check_json_file_exists(search_target)==True:
-        with open(serach_target, 'r') as file:
+        with open(search_target, 'r') as file:
             config = json.load(file)
             aws_config={}
             ec2_config={}

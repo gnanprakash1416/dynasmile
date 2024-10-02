@@ -1,0 +1,8 @@
+{
+    "aws_config_aws_access_key_id":"",
+    "aws_config_aws_secret_access_key":"",
+    "ec2_config_aws_access_key_id":"",
+    "ec2_config_aws_secret_access_key":"",
+    "region_name":"",
+    "bucket_name":""
+}

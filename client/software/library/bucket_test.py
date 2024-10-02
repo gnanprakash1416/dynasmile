@@ -16,7 +16,18 @@ import cv2
 import os
 import boto3
 from boto3.s3.transfer import TransferConfig, S3Transfer
+from .key_loader import check_json_file_exists
+def get_bucket_name(): #allow the user to define their bucket in data.json
+    current_path=os.path.abspath(__file__)
+    current_folder=os.path.dirname(current_path)
 
+    search_target=os.path.join(current_folder,"data.json")
+    if check_json_file_exists(search_target)==True:
+        with open(serach_target, 'r') as file:
+            config = json.load(file)
+            return config.get("bucket_name")
+    else:
+        return 'frank--bucket'
 
 def upload_func(s3_link, filename, bucket_name='frank--bucket', folder_target=None):
     # Let's use Amazon S3
@@ -77,7 +88,7 @@ def upload_video_new(s3_client, filename, bucket_name, signal_func=None, target_
 if __name__ == '__main__':
     s3_resource = boto3.resource('s3')
     upload_func(s3_resource, 'C:\\Users\\denti\\Pictures\\R-C.png',
-                'frank--bucket',)
+                get_bucket_name(),)
     s3_client = boto3.client('s3')
     # download_func(s3_client,'R-C.png','frank--bucket','test\\')
     config = TransferConfig(
@@ -90,7 +101,7 @@ if __name__ == '__main__':
 
     transfer = S3Transfer(s3_client, config)
     now = time()
-    transfer.upload_file('416918082.mp4', 'frank--bucket',
+    transfer.upload_file('416918082.mp4', get_bucket_name(),
                          '416918082.mp4', callback=ProgressPercentage('416918082.mp4'))
     now = time()-now
     print(now)

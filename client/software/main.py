@@ -12,11 +12,11 @@ from library.read_csv_Dialog import read_Dialog
 from library.write_csv_Dialog import write_Dialog
 from library.settings_Dialog import set_Dialog
 from library.test_batch_detections import load_model, detect_face
-from library.bucket_test import upload_video, upload_video_new
+from library.bucket_test import upload_video, upload_video_new,get_bucket_name
 from library.json_handler import append_tojson, is_item_in_json, read_from_json
 from library.another import manage_item
 from library.aws_connection import start_ec2_instance,stop_ec2_instance
-from library.new import decrypt_new
+from library.crypt import decrypt_new
 from library.key_loader import load_key_api
 
 import socket
@@ -52,7 +52,7 @@ class Thread(QThread):
     '''View file to know more information.'''
 
     def run(self):
-        upload_video_new(self.s3_client, self.filename, 'frank--bucket')
+        upload_video_new(self.s3_client, self.filename, get_bucket_name())
 
 
 '''This is used to handle the situation when disconnection happens.'''
@@ -656,7 +656,7 @@ class CustomUI(QMainWindow):
                     self.vid = cv2.VideoCapture(video_source)  # Capture video from the given source
                     print("Ready to capture new file.")
                     # Start a new thread to upload the video
-                    thread = Thread(self.s3_client, video_source, 'frank--bucket')
+                    thread = Thread(self.s3_client, video_source, get_bucket_name())
                     thread.start()  # Start the thread
                     thread.wait()   # Use wait() to wait for the thread to finish
                 else:
