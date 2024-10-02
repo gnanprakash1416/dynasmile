@@ -19,12 +19,11 @@ def check_json_file_exists(file_path):
         return False
 
 def load_key_api():
-    # 替换为您的 API URL
     api_url = 'https://rt0ut7kstj.execute-api.us-east-1.amazonaws.com/prod/keyapi'
     
-    # 设置请求头，包括 API 密钥
+    # api key, for security
     headers = {
-        'x-api-key': '123456'  # 使用正确的 API 密钥
+        'x-api-key': '123456'  
     }
     current_path=os.path.abspath(__file__)
     current_folder=os.path.dirname(current_path)
