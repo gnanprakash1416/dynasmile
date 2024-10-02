@@ -2,3 +2,8 @@
 Use ALT 1, ALT 2, ALT 3 to start all the programs.
 
 2024-10-02 11:57:02,495 - ERROR - packet queue is empty, aborting
+2024-10-02 20:18:51,738 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-02 20:19:32,230 - ERROR - packet queue is empty, aborting
+2024-10-02 20:23:53,991 - ERROR - packet queue is empty, aborting

@@ -1677,6 +1677,8 @@ if __name__ == '__main__':
     except Exception as e:
         print(e)
         stop_ec2_instance(instance_id, credentials_file)
+    finally:
+        stop_ec2_instance(instance_id, credentials_file)
 '''
 12.10 task: write_csv dialog choose different image.
 '''
