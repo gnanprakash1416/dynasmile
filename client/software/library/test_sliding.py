@@ -19,12 +19,13 @@ class EmotionSlider(QSlider):
     def on_value_changed(self, value):
         # 在值改变时自动重绘滑块
         self.location=value
-        print(f"on_value_changed called.Now the location is {self.location}")
+        #print(f"on_value_changed called.Now the location is {self.location}")
         self.update()
         
     def eventFilter(self, source, event):
         if event.type() == event.MouseButtonPress or event.type() == event.MouseMove:
-            print(f"Mouse event {event.type()} detected in {source}")
+            pass
+            #print(f"Mouse event {event.type()} detected in {source}")
         return super().eventFilter(source, event)
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -48,8 +49,8 @@ class EmotionSlider(QSlider):
         painter.drawRoundedRect(0, 0, self.width(), self.height(), border_radius, border_radius)
         # Draw the custom slider (as a circular handle)
         thumb_position = self.location * (self.width() / (num_frames - 1))
-        print("location from TEST_SLIDING: "+str(self.location))
-        print(f"Paintevent is called. The thumb_position is {thumb_position}")
+        #print("location from TEST_SLIDING: "+str(self.location))
+        #print(f"Paintevent is called. The thumb_position is {thumb_position}")
         thumb_radius = 15  # Radius of the slider handle
         painter.setBrush(QColor(255, 255, 255))  # White slider handle
         painter.drawEllipse(thumb_position - thumb_radius, (self.height() - thumb_radius * 2) / 2, thumb_radius * 2, thumb_radius * 2)
@@ -95,7 +96,7 @@ class EmotionSlider(QSlider):
         value = int((pos.x() / self.width()) * (len(self.scores) - 1))
         #self.setSliderPosition(value)  # Update the slider position
         self.location=value
-        print(f"The value is now changing in UPDATE_SLIDER_POSITION.The value is {value}")
+        #print(f"The value is now changing in UPDATE_SLIDER_POSITION.The value is {value}")
         #print(self.sliderPosition())
         self.update()  # Redraw the slider
         #self.valueChanged.emit(value)  # Emit value changed signal

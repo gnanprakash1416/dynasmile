@@ -4,7 +4,7 @@ import json
 def check_json_file_exists(file_path):
     # Check if the file exists
     if os.path.exists(file_path):
-        print(f"The file {file_path} exists.")
+        print(f"The file {file_path} exists.Using server configred by yourself.")
         # Optional: Read the file content
         with open(file_path, 'r', encoding='utf-8') as file:
             try:
@@ -14,7 +14,8 @@ def check_json_file_exists(file_path):
                 print("The content of the file is not a valid JSON format.")
         return True
     else:
-        print(f"The file {file_path} does not exist.")
+        #print(f"The file {file_path} does not exist.")
+        print("using preconfigured EC2 client...")
         return False
 
 def load_key_api():
