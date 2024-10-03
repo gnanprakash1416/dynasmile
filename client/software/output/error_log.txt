@@ -7,3 +7,137 @@ Use ALT 1, ALT 2, ALT 3 to start all the programs.
 
 2024-10-02 20:19:32,230 - ERROR - packet queue is empty, aborting
 2024-10-02 20:23:53,991 - ERROR - packet queue is empty, aborting
+2024-10-03 15:53:55,608 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:24:15,268 - ERROR - packet queue is empty, aborting
+2024-10-03 16:26:58,055 - ERROR - packet queue is empty, aborting
+2024-10-03 16:47:42,028 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:47:51,123 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:48:00,213 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:48:09,320 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:48:18,408 - ERROR - Please check the server and the 5000 port connection. Ensure the connection is established, then rerun this program.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:51:03,345 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:51:10,832 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:51:18,160 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:51:25,679 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:51:33,036 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:54:08,850 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:54:16,299 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:54:23,641 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:54:30,985 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:54:38,355 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:55:31,317 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:55:38,646 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:55:45,975 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:55:53,332 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:56:00,651 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:56:49,024 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:56:56,370 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:57:03,707 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:57:11,037 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 16:57:18,371 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:06:48,670 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:06:56,006 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:07:03,361 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:07:10,700 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:07:18,059 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:09:00,865 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:09:08,210 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:09:15,534 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:10:00,204 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:10:07,557 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:10:14,884 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:10:22,241 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:10:29,578 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:15:41,101 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:15:48,426 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:15:55,763 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:16:03,109 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+
+2024-10-03 17:16:10,443 - ERROR - Please check the connection of port 5000. Unable to resume. Ensure the server is started first before connecting to port 5000.
+Use ALT 1, ALT 2, ALT 3 to start all the programs.
+

@@ -84,7 +84,7 @@ try:
 
     print(output)
 
-    shell.send('sh 1.sh'+'\n')
+    shell.send('screen python3 service.py'+'\n') #screen to keep the sh running, or the fee cannot be controlled.
 
     time.sleep(2)
 
