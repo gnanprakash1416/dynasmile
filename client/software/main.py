@@ -29,12 +29,10 @@ import json
 import boto3
 
 import subprocess
-import argparse
 import time
 import logging
 import traceback
 import atexit
-import requests
 
 def log_exception(exc_type, exc_value, exc_traceback):
     if issubclass(exc_type, KeyboardInterrupt):
@@ -333,6 +331,10 @@ class CustomUI(QMainWindow):
         )
 
         #self.s3_client = boto3.client('s3')
+        self.gin=None
+        self.ins=None
+        self.lcpc=None
+        self.rcpc=None
 
         # to ensure the label in the column has enough width.
         self.ui.gridLayout.setColumnMinimumWidth(0, 900)
@@ -342,6 +344,7 @@ class CustomUI(QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.loadImage)
         self.ui.pushButton_clear.clicked.connect(self.landmarks_clear)
         self.ui.pushButton_render.clicked.connect(self.landmarks_calculator)
+        self.ui.pushButton_render.clicked.connect(self.send_info)
         self.ui.pushButton_readcsv.clicked.connect(self.readcsv)
         self.ui.pushButton_writecsv.clicked.connect(self.writecsv)
         self.ui.slider_time.sliderReleasedSignal.connect(self.time_changed)
@@ -462,11 +465,31 @@ class CustomUI(QMainWindow):
         def send_list(data):
             print(type(json.loads(data)))
 
+        @sio.on('debug_server')
+        def debug_server(data):
+            print(data)
+
+        @sio.on('landmark_list')
+        def recv_landmark_list(data):
+            self.oral_landmarks=json.loads(data)
+            self.gin=self.oral_landmarks['gin']
+            self.ins=self.oral_landmarks['ins']
+            self.lcpc=self.oral_landmarks['lcpc']
+            self.rcpc=self.oral_landmarks['rcpc']
+            self.render_signal.emit()
+            self.ui.pushButton_render.setEnabled(True)
+
         @sio.on('emotion_list_of_video')
         def recv_emotion_list(data):
             self.AI_dict = json.loads(data)
             self.emotion_mark_list = self.AI_dict['emotion_list']
             self.commissure_seq = self.AI_dict['commissure_list']
+            self.connection_list=[]
+            for index, value in enumerate(self.commissure_seq):
+                if value!=0:
+                    self.connection_list.append(index) #还原原始视频位置
+                else:
+                    pass
             print("c:" + str(len(self.commissure_seq)))
             self.face_not_detected = self.AI_dict['face_not_detected']
             self.face_greater_than_one_cv2_only = self.AI_dict['face_greater_than_one_cv2_only']
@@ -498,7 +521,7 @@ class CustomUI(QMainWindow):
             '''VERY IMPORTANT:Do not use self.landmarks_calculator here.
             It will cause the thread to have huge mistakes.'''
             print(json.loads(data)['name'])
-            print(json.loads(data)['emotion_list'])
+            #print(json.loads(data)['emotion_list'])
             print('not detected rate: ' +
                   str(self.face_not_detected /
                       len(self.emotion_mark_list)))
@@ -767,6 +790,24 @@ class CustomUI(QMainWindow):
             self.ui.pushButton_2.setEnabled(False)
             self.display()  # Update display
 
+    def send_frame_number_pesudo(self):
+        '''function to test whether the server can receive frame number.Copied from load_first_frame.'''
+        try:
+            self.sio.call(
+                'frame_number', {
+                    'frame number': -1}, timeout=5)
+        except BaseException:
+            pass
+
+    def send_frame_number(self):
+        '''function to test whether the server can receive frame number.Copied from load_first_frame.'''
+        try:
+            self.sio.call(
+                'frame_number', {
+                    'frame number': self.connection_list[round(self.current_frame-1)]}) #还原原始视频位置
+            print("frame number sent:"+str(self.current_frame))
+        except BaseException:
+            pass
 
     def load_first_frame(self):
         '''new function. save the video. to filter the emotion.'''
@@ -855,8 +896,8 @@ class CustomUI(QMainWindow):
                 self.image, height=int(
                     self.vid.get(
                         cv2.CAP_PROP_FRAME_HEIGHT)))
-            print(self.vid.get(cv2.CAP_PROP_FRAME_WIDTH))  # necessary
-            print(self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT))  # necessary
+            #print(self.vid.get(cv2.CAP_PROP_FRAME_WIDTH))  # necessary for debuuging, but large video may be laggy.
+            #print(self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT))  # necessary
 
             # another video that labels all not happy frames with a green
             # frame.
@@ -940,6 +981,11 @@ class CustomUI(QMainWindow):
         # print("conversion_list:"+str(z))
 
         x = list(pre_x)
+
+        if len(x)>len(y):
+            x=x[:-1]
+        elif len(x)<len(y):
+            y=y[:-1]
 
         plt.plot(x, y, 'g--')  # hotfix
 
@@ -1038,10 +1084,10 @@ class CustomUI(QMainWindow):
             to set at the label.
         """
         self.tmp = image
-        if self.requires_analyze == True:
-            image = imutils.resize(image, width=640)
-        else:
-            image = imutils.resize(image, height=618)
+        #if self.requires_analyze == True:
+        #    image = imutils.resize(image, width=640)
+        #else:
+        image = imutils.resize(image, height=618)
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = QImage(
             frame,
@@ -1080,8 +1126,13 @@ class CustomUI(QMainWindow):
 
         print(self.ui.scene)  # you do not have to createa new scene.
 
+    def send_info(self):
+        self.send_frame_number()
+        self.ui.pushButton_render.setEnabled(False)
+
     def landmarks_calculator(self):
         landmarks = detect_face(self.detector, self.image)
+        print('0:'+str(self.image.shape[0]))
         transformed_landmarks_dict_list = []
         if landmarks is not None:
             self.landmarks = landmarks
@@ -1119,36 +1170,60 @@ class CustomUI(QMainWindow):
             transformed_landmarks_dict_list.append({'center_x': landmarks[8][0],
                                                     'center_y': landmarks[8][1],
                                                     'name': 'soft tissue pogonion'})
-            if self.display_tooth_landmarks == True:
+            if self.display_tooth_landmarks == True and self.ins!=None:
                 # calculate the incisor edge point's x from the lip border
                 # distance.
-                incisor_edge_x = landmarks[62][0] + self.incisor_edge_index * (
+                if self.ins[0]!=10000: #tried to detect but not detected
+                    print(self.gin[0])
+                    print('48'+str(landmarks[48][0]))
+                    incisor_edge_x = self.ins[0]
+                    # calculate the incisor edge point's y from the lip border
+                    # distance.
+                    incisor_edge_y = self.ins[1]
+                if self.ins[0]==10000: #the auxillary method
+                    incisor_edge_x = landmarks[62][0] + self.incisor_edge_index * (
                     landmarks[66][0] - landmarks[62][0])
-                # calculate the incisor edge point's y from the lip border
-                # distance.
-                incisor_edge_y = landmarks[62][1] + self.incisor_edge_index * (
-                    landmarks[66][1] - landmarks[62][1])
+                    # calculate the incisor edge point's y from the lip border
+                    # distance.
+                    incisor_edge_y = landmarks[62][1] + self.incisor_edge_index * (
+                        landmarks[66][1] - landmarks[62][1])
                 transformed_landmarks_dict_list.append({'center_x': incisor_edge_x,
                                                         'center_y': incisor_edge_y,
                                                         'name': 'incisor edge'})
-                transformed_landmarks_dict_list.append({'center_x': self.cuspid_edge_index * (landmarks[64][0] - landmarks[66][0]) + landmarks[66][0] + landmarks[62][0] + self.incisor_edge_index * (landmarks[66][0] - landmarks[62][0]) - landmarks[66][0],
+                dis_from_incisor_to_lip = self.dis_of_vec((incisor_edge_x, incisor_edge_y),
+                                                        self.dconv(
+                                                            landmarks[62]),
+                                                            ((landmarks[21][0] + landmarks[22][0]) / 2,
+                                                            (landmarks[21][1] + landmarks[22][1]) / 2),
+                                                            self.dconv(landmarks[33]))  # the l1
+                
+                if self.rcpc[0]!=10000:
+                    transformed_landmarks_dict_list.append({'center_x': self.rcpc[0],
+                                                            'center_y': self.rcpc[1],
+                                                            'name': 'left upper cuspid tip'})
+                if self.rcpc[0]==10000: #the auxillary method
+                    transformed_landmarks_dict_list.append({'center_x': self.cuspid_edge_index * (landmarks[64][0] - landmarks[66][0]) + landmarks[66][0] + landmarks[62][0] + self.incisor_edge_index * (landmarks[66][0] - landmarks[62][0]) - landmarks[66][0],
                                                         'center_y': (landmarks[65][1] - landmarks[66][1]) * self.cuspid_edge_index * (landmarks[64][0] - landmarks[66][0]) / (landmarks[65][0] - landmarks[66][0]) + landmarks[66][1] + landmarks[62][1] + self.incisor_edge_index * (landmarks[66][1] - landmarks[62][1]) - landmarks[66][1],
                                                         'name': 'left upper cuspid tip'})
-                transformed_landmarks_dict_list.append({'center_x': self.cuspid_edge_index * (landmarks[60][0] - landmarks[66][0]) + landmarks[66][0] + landmarks[62][0] + self.incisor_edge_index * (landmarks[66][0] - landmarks[62][0]) - landmarks[66][0],
-                                                        'center_y': (landmarks[67][1] - landmarks[66][1]) * self.cuspid_edge_index * (landmarks[60][0] - landmarks[66][0]) / (landmarks[67][0] - landmarks[66][0]) + landmarks[66][1] + landmarks[62][1] + self.incisor_edge_index * (landmarks[66][1] - landmarks[62][1]) - landmarks[66][1],
-                                                        'name': 'right upper cuspid tip'})
-                dis_from_incisor_to_lip = self.dis_of_vec((incisor_edge_x, incisor_edge_y),
-                                                          self.dconv(
-                    landmarks[62]),
-                    ((landmarks[21][0] + landmarks[22][0]) / 2,
-                     (landmarks[21][1] + landmarks[22][1]) / 2),
-                    self.dconv(landmarks[33]))  # the l1
-                cer_of_incisor_x = incisor_edge_x - self.incisor_length / dis_from_incisor_to_lip * (incisor_edge_x - landmarks[62][0])
-                cer_of_incisor_y = incisor_edge_y - self.incisor_length / dis_from_incisor_to_lip * (incisor_edge_y - landmarks[62][1])
+                    
+                if self.lcpc[0]!=10000:
+                    transformed_landmarks_dict_list.append({'center_x': self.lcpc[0],
+                                                            'center_y': self.rcpc[1],
+                                                            'name': 'right upper cuspid tip'})
+                if self.lcpc[0]==10000: #the auxillary method
+                    transformed_landmarks_dict_list.append({'center_x': self.cuspid_edge_index * (landmarks[60][0] - landmarks[66][0]) + landmarks[66][0] + landmarks[62][0] + self.incisor_edge_index * (landmarks[66][0] - landmarks[62][0]) - landmarks[66][0],
+                                                            'center_y': (landmarks[67][1] - landmarks[66][1]) * self.cuspid_edge_index * (landmarks[60][0] - landmarks[66][0]) / (landmarks[67][0] - landmarks[66][0]) + landmarks[66][1] + landmarks[62][1] + self.incisor_edge_index * (landmarks[66][1] - landmarks[62][1]) - landmarks[66][1],
+                                                            'name': 'right upper cuspid tip'})
+                if self.gin[0]!=10000:
+                    cer_of_incisor_x = self.gin[0]
+                    cer_of_incisor_y = self.gin[1]
+                if self.gin[0]==10000: #the auxillary method
+                    cer_of_incisor_x = incisor_edge_x - self.incisor_length / dis_from_incisor_to_lip * (incisor_edge_x - landmarks[62][0])
+                    cer_of_incisor_y = incisor_edge_y - self.incisor_length / dis_from_incisor_to_lip * (incisor_edge_y - landmarks[62][1])
                 transformed_landmarks_dict_list.append({'center_x': cer_of_incisor_x,
-                                                        'center_y': cer_of_incisor_y,
-                                                        'name': 'cervical part of incisor'})
-                print(f"incisor_edge_index from LANDMARKS_CALCULATOR:{self.incisor_edge_index}")
+                                                            'center_y': cer_of_incisor_y,
+                                                            'name': 'cervical part of incisor'})
+                    #print(f"incisor_edge_index from LANDMARKS_CALCULATOR:{self.incisor_edge_index}")
             # transformed_landmarks_dict.
             '''now we add the offset and calculate.'''
             for value in transformed_landmarks_dict_list:
@@ -1278,7 +1353,7 @@ class CustomUI(QMainWindow):
         '''dict for landmarks is a dict that stores the parameters to be passed to MyItem object.
         the structure of the dict is:{"center_x":int,"center_y":int,"name":str}
         '''
-        print(hex(id(QThread.currentThread())))
+        #print(hex(id(QThread.currentThread())))
         self.ui.landmark_list[dict_for_landmarks['name']] = MyItem(
             dict_for_landmarks, self.ui.landmark_size)  # allocate like this to ensure in the middle. -25 and -25 are the upper and left most of the coordinates.
         # self.ui.landmark_list[0].setPos(QtCore.QPointF(100,100))
@@ -1575,7 +1650,7 @@ class CustomUI(QMainWindow):
     def get_incisor_edge_index(self, text):
         try:
             self.incisor_edge_index = float(text)
-            incisor_edge_x = int(
+            '''incisor_edge_x = int(
                 self.landmarks[62][0] +
                 self.incisor_edge_index *
                 (
@@ -1590,13 +1665,13 @@ class CustomUI(QMainWindow):
                     self.landmarks[66][1] -
                     self.landmarks[62][1]) -
                 self.image.shape[0] /
-                2)  # calculate the incisor edge point's y from the lip border distance.
+                2)  # calculate the incisor edge point's y from the lip border distance.'''
 
-            incisor_point = {'center_x': incisor_edge_x,
+            '''incisor_point = {'center_x': incisor_edge_x,
                              'center_y': incisor_edge_y,
-                             'name': 'incisor edge'}
+                             'name': 'incisor edge'}'''
 
-            if 'incisor edge' in self.ui.landmark_list:  # search the landmark_list
+            '''if 'incisor edge' in self.ui.landmark_list:  # search the landmark_list
                 self.ui.landmark_list['incisor edge'].set_position(
                     incisor_point['center_x'], incisor_point['center_y'])
             else:
@@ -1606,11 +1681,10 @@ class CustomUI(QMainWindow):
                     self.refresh)  # connect to refresh
                 self.ui.scene.addItem(self.ui.landmark_list['incisor edge'])
                 print('added!!!!!!!!!!!!!!!!!!!!!!!"')
-                print(incisor_edge_x, incisor_edge_y)
+                print(incisor_edge_x, incisor_edge_y)'''
         except BaseException:
             print('incisor error')
-        finally:
-            pass
+        
 
     def get_cuspid_edge_index(self, text):
         try:
